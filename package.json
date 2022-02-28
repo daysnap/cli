@@ -14,7 +14,8 @@
   "author": "",
   "license": "MIT",
   "bin": {
-    "dsc": "./bin/dsc.js"
+    "dsc": "./bin/dsc.js",
+    "dsc-run": "./bin/dsc-run.js"
   },
   "bugs": {
     "url": "https://github.com/daysnap/daysnap-cli/issues"
