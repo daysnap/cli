@@ -1,5 +1,5 @@
 {
-  "name": "daysnap-cli",
+  "name": "@daysnap/cli",
   "version": "1.0.0",
   "description": "工具脚手架",
   "main": "index.js",
@@ -12,9 +12,18 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "bin": {
+    "dsc": "./bin/dsc.js"
+  },
   "bugs": {
     "url": "https://github.com/daysnap/daysnap-cli/issues"
   },
-  "homepage": "https://github.com/daysnap/daysnap-cli#readme"
+  "homepage": "https://github.com/daysnap/daysnap-cli#readme",
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "commander": "^9.0.0",
+    "inquirer": "^8.2.0",
+    "ora": "^6.1.0"
+  }
 }
