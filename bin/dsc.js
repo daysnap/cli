@@ -3,16 +3,32 @@
 'use strict'
 
 const { program } = require('commander')
+const chalk = require('chalk')
 const { br } = require('../utils/helper')
-const { version } = require('../package.json')
+const { name, version } = require('../package.json')
 
 br()
 
 program
-    .version(version)
-    .usage(`<command>`)
-    .command('run [name]', 'run specified task')
-    .command('a [name]', 'run specified task')
-    .parse(process.argv)
+    .version(`${name} ${version}`)
+    .usage(`<command> [options]`)
 
-console.log('version => ', version)
+// 切换 npm 源
+program
+    .command('npm [options]', 'run specified task')
+    .description('create a new project powered by vue-cli-service')
+    .allowUnknownOption()
+    .action(() => {
+        console.log('11')
+    })
+
+// add some useful info on help
+program.on('--help', () => {
+    console.log()
+    console.log(`  Run ${chalk.cyan(`dsc <command> --help`)} for detailed usage of given command.`)
+    console.log()
+})
+
+// program.commands.forEach(c => c.on('--help', () => console.log(1)))
+
+program.parse(process.argv)

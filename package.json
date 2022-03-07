@@ -22,9 +22,14 @@
   },
   "homepage": "https://github.com/daysnap/daysnap-cli#readme",
   "dependencies": {
-    "chalk": "^5.0.0",
-    "commander": "^9.0.0",
+    "chalk": "^4.1.2",
+    "commander": "^7.2.0",
     "inquirer": "^8.2.0",
-    "ora": "^6.1.0"
+    "minimist": "^1.2.5",
+    "ora": "^6.1.0",
+    "semver": "^7.3.5"
+  },
+  "engines": {
+    "node": "^12.0.0 || >= 14.0.0"
   }
 }
