@@ -21,9 +21,7 @@ program
     .option('-l, --list', '列出当前支持的 npm 源')
     .option('-u, --use', '切换 npm 源')
     .allowUnknownOption()
-    .action(() => {
-        require('../lib/npm')
-    })
+    .action(() => require('../lib/npm'))
 
 // 帮助信息
 program.on('--help', () => {
