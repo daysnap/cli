@@ -4,7 +4,7 @@
 
 const program = require('commander')
 const chalk = require('chalk')
-const { br } = require('../utils/helper')
+const { br, pd } = require('../utils/helper')
 const { l } = require('../utils/logger')
 const { name, version } = require('../package.json')
 const overwrite = require('../utils/overwrite')
@@ -31,7 +31,7 @@ program
 // 帮助信息
 program.on('--help', () => {
     br()
-    l(`  执行 ${chalk.cyan(`dsc <command> -h`)} 查看指定命令的使用方法.`)
+    l(pd(`执行 ${chalk.cyan(`dsc <command> -h`)} 查看指定命令的使用方法.`, 2))
     br()
 })
 

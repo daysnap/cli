@@ -1,29 +1,36 @@
 
-const { br } = require('../utils/helper')
+const chalk = require('chalk')
+const { l } = require('../utils/logger')
+const { br, pd } = require('../utils/helper')
 
 const overwrite = (fn, cb) => program => {
-    const ofn = program.Command.prototype[fn]
     program.Command.prototype[fn] = function (...args) {
-        // ofn.call(this, ...args)
+        if (fn === 'unknownOption' && this._allowUnknownOption) {
+            return
+        }
+        this.outputHelp()
         cb && cb.call(this, ...args)
+        br()
         process.exit(1)
     }
 }
 
-const outputHelp = overwrite('outputHelp', br)
+const o = m => l(pd(chalk.red(m), 2))
 
-const unknownOption = overwrite('unknownOption', (dd) => {
-    this.outputHelp()
-    console.log('dd', dd)
-})
+const unknownOption = overwrite('unknownOption', optionName =>
+    o(`未知选项 ${chalk.yellow(optionName)} .`)
+)
 
-const missingArgument = overwrite('optionMissingArgument', (dd) => {
-    this.outputHelp()
-    console.log('dd1', dd)
-})
+const missingArgument = overwrite('missingArgument', argName =>
+    o(`缺少必需参数 ${chalk.yellow(`<${argName}>`)} .`)
+)
+
+const optionMissingArgument = overwrite('optionMissingArgument', (option, flag) =>
+    o(`缺少选项的必需参数 ${chalk.yellow(option.flags)}${flag ? `，得到了 ${chalk.yellow(flag)}` : ``} .`)
+)
 
 module.exports = program => {
-    // outputHelp(program)
     unknownOption(program)
     missingArgument(program)
+    optionMissingArgument(program)
 }
