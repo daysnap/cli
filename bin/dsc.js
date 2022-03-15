@@ -7,6 +7,7 @@ const chalk = require('chalk')
 const { br, pd } = require('../utils/helper')
 const { l } = require('../utils/logger')
 const { name, version } = require('../package.json')
+const { createRouter } = require('../utils/router')
 const overwrite = require('../utils/overwrite')
 
 overwrite(program)
@@ -26,7 +27,7 @@ program
     .option('-l, --list', '列出当前支持的 npm 源')
     .option('-u, --use <name>', '切换 npm 源')
     .allowUnknownOption()
-    .action(require('../lib/npm'))
+    .action(createRouter(require('../lib/npm')))
 
 // 帮助信息
 program.on('--help', () => {
