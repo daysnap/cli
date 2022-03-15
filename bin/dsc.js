@@ -27,23 +27,16 @@ program
     .option('-l, --list', '列出当前支持的 npm 源')
     .option('-u, --use <name>', '切换 npm 源')
     .allowUnknownOption()
-    .action(() => {
-    })
-    .outputHelp()
-
+    .action(createRouter(require('../lib/npm')))
 
 // 帮助信息
-program.on('--help', () => {
+program.on('--help', () =>
     logger
         .br()
         .info(padding(`执行 ${chalk.cyan(`dsc <command> -h`)} 查看指定命令的使用方法.`, 2))
         .br()
-})
-
-program.commands.forEach(command =>
-    command
-        .option('-h, --help', '显示命令帮助')
-        .on('--help', logger.br)
 )
+
+program.commands.forEach(command => command.on('--help', logger.br))
 
 program.parse(process.argv)
