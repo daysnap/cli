@@ -1,5 +1,6 @@
 
 const createRouter = routes => (options, ctx) => {
+    console.log('options => ', options)
     const keys = Object.keys(options)
     if (!keys.length) {
         return ctx.outputHelp()
