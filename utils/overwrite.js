@@ -1,7 +1,6 @@
 
 const chalk = require('chalk')
-const { l } = require('../utils/logger')
-const { br, pd } = require('../utils/helper')
+const { error, br } = require('../utils/logger')
 
 const overwrite = (fn, cb) => program => {
     program.Command.prototype[fn] = function (...args) {
@@ -15,7 +14,7 @@ const overwrite = (fn, cb) => program => {
     }
 }
 
-const o = m => l(pd(chalk.red(m), 2))
+const o = m => error(chalk.red(m))
 
 const unknownOption = overwrite('unknownOption', optionName =>
     o(`未知选项 ${chalk.yellow(optionName)} .`)
