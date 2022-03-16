@@ -1,11 +1,16 @@
 
-const createRouter = routes => (options, ctx) => {
-    console.log('options => ', options)
+const parseArgs = (args = []) => [...args].reverse()
+
+const createRouter = routes => (...args) => {
+    const [ command, options ] = parseArgs(args)
+    if (typeof routes === 'function') {
+        return routes(...args)
+    }
     const keys = Object.keys(options)
     if (!keys.length) {
-        return ctx.outputHelp()
+        return command.outputHelp()
     }
-    keys.forEach(path => routes[path](options, ctx))
+    keys.forEach(path => routes[path](options, command))
 }
 
 module.exports = {
