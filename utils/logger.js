@@ -15,12 +15,12 @@ const print = messages => {
 }
 
 const error = err => {
-    console.error(`${chalk.bgRed(padding('ERROR'))} ${chalk.red(err)}`)
+    console.error(`  ${chalk.bgRed(padding('ERROR'))} ${chalk.red(err)}`)
     return logger
 }
 
 const success = msg => {
-    console.log(`${chalk.bgGreenBright(padding('SUCCESS'))} ${msg}`)
+    console.log(`  ${chalk.bgGreenBright(padding('SUCCESS'))} ${msg}`)
     return logger
 }
 

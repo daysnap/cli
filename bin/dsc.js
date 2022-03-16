@@ -37,8 +37,15 @@ program
     .allowUnknownOption()
     .action(createRouter(require('../lib/publish')))
 
+// 处理未知命令
+program
+    .arguments('<command>')
+    .action(createRouter(require('../lib/404')))
+
 // 帮助信息
-program.commands.forEach(command => command.on('--help', logger.br))
+program
+    .commands
+    .forEach(command => command.on('--help', logger.br))
 
 program
     .on('option:version', () => logger.info(`${name} ${version}`).br() && process.exit())
