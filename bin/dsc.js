@@ -32,8 +32,9 @@ program
 // 发布依赖
 program
     .command('publish')
-    .description('发布 npm 包')
-    .option('-d, --dir <project-dir>', '指定项目目录')
+    .description('发布 npm 包，会自动默认处理 version 版本')
+    .option('-r, --registry <registry-uri>', '指定发布源')
+    .option('-v, --version <version>', '指定发布的对应版本')
     .allowUnknownOption()
     .action(createRouter(require('../lib/publish')))
 
