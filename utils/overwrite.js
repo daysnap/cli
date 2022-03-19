@@ -2,15 +2,22 @@
 const chalk = require('chalk')
 const { error, br } = require('../utils/logger')
 
+const exit = (code = 1) =>  process.exit(code)
+
 const overwrite = (fn, cb) => program => {
     program.Command.prototype[fn] = function (...args) {
+        console.log('args => ', args)
         if (fn === 'unknownOption' && this._allowUnknownOption) {
+            console.log('111')
             return
         }
-        this.outputHelp()
+        // this.outputHelp()
+        // if (args.includes('command')) {
+        //     return exit(1)
+        // }
         cb && cb.call(this, ...args)
         br()
-        process.exit(1)
+        exit(1)
     }
 }
 
