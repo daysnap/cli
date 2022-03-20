@@ -41,6 +41,7 @@ program
 // 处理未知命令
 program
     .arguments('<command>')
+    .allowUnknownOption()
     .action(createRouter(require('../lib/404')))
 
 // 帮助信息
