@@ -3,14 +3,21 @@ const parseArgs = (args = []) => [...args].reverse()
 
 const createRouter = routes => (...args) => {
     const [ command, options ] = parseArgs(args)
-    if (typeof routes === 'function') {
-        return routes(...args)
-    }
+    const isFun = typeof routes === 'function'
     const keys = Object.keys(options)
-    if (!keys.length) {
+    let handler
+    keys.forEach(path => {
+        if (!handler && routes[path]) {
+            handler = routes[path]
+        }
+    })
+    if (!handler && isFun) {
+        handler = routes
+    }
+    if (!handler) {
         return command.outputHelp()
     }
-    keys.forEach(path => routes[path](options, command))
+    handler(...args)
 }
 
 module.exports = {

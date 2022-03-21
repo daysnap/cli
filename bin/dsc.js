@@ -20,14 +20,13 @@ program
     .helpOption('-h, --help', '显示命令帮助')
     .addHelpCommand('help [command]', '显示命令帮助')
 
-
 // 创建项目
 program
-    .command('create [app-name]')
+    .command('create')
     .description('创建项目')
-    .option('-t <>')
-    .option('-l, --list', '列出当前支持的模板')
-    .allowUnknownOption()
+    .usage('<app-name> -t <template>')
+    .option('-t, --template', '指定项目模板')
+    .option('-l, --list', '当前的模板列表')
     .action(createRouter(require('../lib/create')))
 
 // 切换 npm 源
@@ -36,7 +35,6 @@ program
     .description('快速切换 npm 源')
     .option('-l, --list', '列出当前支持的 npm 源')
     .option('-u, --use <name>', '切换 npm 源')
-    .allowUnknownOption()
     .action(createRouter(require('../lib/npm')))
 
 // 发布依赖
@@ -45,13 +43,11 @@ program
     .description('发布 npm 包，会自动默认处理 version 版本')
     .option('-r, --registry <registry-uri>', '指定发布源')
     .option('-v, --version <version>', '指定发布的对应版本')
-    .allowUnknownOption()
     .action(createRouter(require('../lib/publish')))
 
 // 处理未知命令
 program
     .arguments('<command>')
-    .allowUnknownOption()
     .action(createRouter(require('../lib/404')))
 
 // 帮助信息
