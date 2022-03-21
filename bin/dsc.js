@@ -20,6 +20,16 @@ program
     .helpOption('-h, --help', '显示命令帮助')
     .addHelpCommand('help [command]', '显示命令帮助')
 
+
+// 创建项目
+program
+    .command('create [app-name]')
+    .description('创建项目')
+    .option('-t <>')
+    .option('-l, --list', '列出当前支持的模板')
+    .allowUnknownOption()
+    .action(createRouter(require('../lib/create')))
+
 // 切换 npm 源
 program
     .command('npm')
