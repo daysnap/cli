@@ -25,8 +25,9 @@ program
     .command('create')
     .description('创建项目')
     .usage('<app-name> -t <template>')
-    .option('-t, --template', '指定项目模板')
-    .option('-l, --list', '当前的模板列表')
+    .option('-t, --template <template>', '指定项目模板')
+    .option('-l, --list [username]', '当前的模板列表')
+    .option('-u, --username', '指定组织或用户')
     .action(createRouter(require('../lib/create')))
 
 // 切换 npm 源
