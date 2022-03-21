@@ -2,6 +2,16 @@
 const child_process = require('child_process')
 const fs = require('fs')
 const semver = require('semver')
+const o = require('ora')
+
+const ora = (options) => {
+    const spinner = o(options)
+    spinner.toast = text => {
+        spinner.text = text
+        return spinner
+    }
+    return spinner
+}
 
 const isExists = filepath => new Promise(resolve => {
     fs.access(filepath, err => resolve(!err))
@@ -34,6 +44,7 @@ const upgrade = (version, num = 1) => {
 }
 
 module.exports = {
+    ora,
     upgrade,
     padding,
     isExists,
