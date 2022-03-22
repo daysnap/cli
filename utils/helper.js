@@ -15,6 +15,8 @@ const isExists = filepath => new Promise(resolve => {
 
 const exec = cmd => new Promise((resolve, reject) => {
     child_process.exec(cmd, (err,stdout,stderr) => {
+        console.log('cmd err => ', err)
+        console.log('cmd stderr => ', stderr)
         if (err || stderr) reject(err || stderr)
         else resolve(stdout.trim())
     })
