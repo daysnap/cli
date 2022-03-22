@@ -15,9 +15,7 @@ const isExists = filepath => new Promise(resolve => {
 
 const exec = cmd => new Promise((resolve, reject) => {
     child_process.exec(cmd, (err,stdout,stderr) => {
-        console.log('cmd err => ', err)
-        console.log('cmd stderr => ', stderr)
-        if (err || stderr) reject(err || stderr)
+        if (err) reject(err)
         else resolve(stdout.trim())
     })
 })
@@ -41,11 +39,15 @@ const upgrade = (version, num = 1) => {
     return arr.reverse().map(i => +i.reverse().join('')).join('.')
 }
 
+const geneDashLine = (str, len) =>
+    padding(new Array(Math.max(2, len - str.length + 2)).join('-'))
+
 module.exports = {
     ora,
     sleep,
     upgrade,
     padding,
     isExists,
+    geneDashLine,
     exec,
 }

@@ -26,8 +26,8 @@ program
     .description('创建项目')
     .usage('<app-name> -t <template>')
     .option('-t, --template <template>', '指定项目模板')
-    .option('-l, --list [username]', '当前的模板列表')
-    .option('-u, --username', '指定组织或用户')
+    .option('-l, --list', '当前的模板列表')
+    .option('-u, --username <username>', '指定组织或用户')
     .action(createRouter(require('../lib/create')))
 
 // 切换 npm 源
@@ -42,7 +42,7 @@ program
 program
     .command('publish')
     .description('发布 npm 包，会自动默认处理 version 版本')
-    .option('-r, --registry <registry-uri>', '指定发布源')
+    .option('-r, --registry <registry>', '指定发布源')
     .option('-v, --version <version>', '指定发布的对应版本')
     .action(createRouter(require('../lib/publish')))
 
