@@ -1,17 +1,13 @@
 
 const child_process = require('child_process')
 const fs = require('fs')
-const semver = require('semver')
-const o = require('ora')
+const os = require('ora')
 
-const ora = (options) => {
-    const spinner = o(options)
-    spinner.toast = text => {
-        spinner.text = text
-        return spinner
-    }
-    return spinner
-}
+const sleep = (time = 300, flag = true) =>
+    new Promise((resolve, reject) =>
+        setTimeout(flag ? resolve : reject, time))
+
+const ora = (options) => os(options)
 
 const isExists = filepath => new Promise(resolve => {
     fs.access(filepath, err => resolve(!err))
@@ -45,6 +41,7 @@ const upgrade = (version, num = 1) => {
 
 module.exports = {
     ora,
+    sleep,
     upgrade,
     padding,
     isExists,
