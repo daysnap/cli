@@ -34,7 +34,6 @@ program
 program
     .command('husky')
     .description('创建 git 提交钩子')
-    .option('-d, --dir <project-dir>')
     .action(createRouter(require('../lib/husky')))
 
 // 切换 npm 源
