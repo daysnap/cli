@@ -4,14 +4,15 @@
   "description": "工具脚手架",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "husky": "husky install && echo 'export PATH=\"/usr/local/bin/:$PATH\"' >> ~/.huskyrc"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/daysnap/daysnap-cli.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "woshiajuana",
   "license": "MIT",
   "bin": {
     "dsc": "./bin/dsc.js"
@@ -37,5 +38,11 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "commitizen": "^4.2.4",
+    "husky": "^7.0.4"
   }
 }
