@@ -3,6 +3,7 @@ const child_process = require('child_process')
 const fs = require('fs')
 const os = require('ora')
 const path = require('path')
+const util = require('util')
 
 const sleep = (time = 300, flag = true) =>
     new Promise((resolve, reject) =>
@@ -55,6 +56,9 @@ const parsePackage = async (dir = '.') => {
     return { ...require(pkg), pkg }
 }
 
+const writeFile = async (...args) =>
+    await util.promisify(fs.writeFile)(...args)
+
 module.exports = {
     parsePackage,
     ora,
@@ -64,4 +68,5 @@ module.exports = {
     isExists,
     geneDashLine,
     exec,
+    writeFile,
 }
