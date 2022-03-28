@@ -27,6 +27,7 @@ program
     .usage('<app-name> -t <template>')
     .option('-t, --template <template>', '指定项目模板')
     .option('-l, --list', '当前的模板列表')
+    .option('-o, --offline', '使用缓存模板')
     .option('-u, --username <username>', '指定组织或用户')
     .action(createRouter(require('../lib/create')))
 
