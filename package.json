@@ -11,7 +11,10 @@
     "type": "git",
     "url": "git+https://github.com/daysnap/daysnap-cli.git"
   },
-  "keywords": [],
+  "keywords": [
+    "daysnap",
+    "cli"
+  ],
   "author": "woshiajuana",
   "license": "MIT",
   "bin": {
