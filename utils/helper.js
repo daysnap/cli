@@ -4,6 +4,7 @@ const fs = require('fs')
 const os = require('ora')
 const path = require('path')
 const util = require('util')
+const rm = require('rimraf').sync
 
 const sleep = (time = 300, flag = true) =>
     new Promise((resolve, reject) =>
@@ -44,7 +45,6 @@ const upgrade = (version, num = 1) => {
 const geneDashLine = (str, len) =>
     padding(new Array(Math.max(2, len - str.length + 2)).join('-'))
 
-
 // 解析项目目录
 const parsePackage = async (dir = '.') => {
     const projectDir = process.cwd()
@@ -60,6 +60,7 @@ const writeFile = async (...args) =>
     await util.promisify(fs.writeFile)(...args)
 
 module.exports = {
+    rm,
     parsePackage,
     ora,
     sleep,
