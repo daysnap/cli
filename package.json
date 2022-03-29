@@ -24,13 +24,14 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^7.2.0",
-    "download-git-repo": "^3.0.2",
+    "git-clone": "^0.2.0",
     "inquirer": "^8.2.0",
     "leven": "^3.1.0",
     "metalsmith": "^2.3.0",
     "minimist": "^1.2.5",
     "ora": "^5.4.1",
     "request": "^2.88.2",
+    "rimraf": "^3.0.2",
     "semver": "^7.3.5",
     "user-home": "^3.0.0"
   },
