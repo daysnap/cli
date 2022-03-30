@@ -27,6 +27,7 @@ program
     .option('-s, --set <key> <value>', '修改配置')
     .option('-g, --get [key]', '查询配置')
     .option('-d, --del <key>', '查询配置')
+    .option('--json', 'JSON 的形式展示配置')
     .action(createRouter(require('../lib/config')))
 
 // 创建项目

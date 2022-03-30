@@ -97,7 +97,7 @@ const parseObject = (str, value) => {
 const setConfig = async (key = '', value = '') => {
     const { DSCRC } = config
     const cfg = merge(await getConfig(), parseObject(key, value))
-    await writeFile(DSCRC, JSON.stringify(cfg, null, 4))
+    await writeFile(DSCRC, ini.stringify(cfg, null, 4))
     return cfg
 }
 
@@ -108,7 +108,7 @@ const delConfig = async key => {
         index === arr.length - 1 ? delete obj[key] : (obj = obj[key])
     })
     const { DSCRC } = config
-    await writeFile(DSCRC, JSON.stringify(cfg, null, 4))
+    await writeFile(DSCRC, ini.stringify(cfg, null, 4))
     return cfg
 }
 
