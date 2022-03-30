@@ -19,9 +19,12 @@ Thumbs.db
 *.pyc
 *.pyo
 .build
+
 node_modules
 .cache
+
 dist
+
 tests/*.css
 yarn.lock
 package-lock.json
@@ -31,3 +34,5 @@ package-lock.json
 commitlint.config.js
 
 docs
+
+.github
