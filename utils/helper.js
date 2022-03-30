@@ -1,10 +1,13 @@
 
 const child_process = require('child_process')
 const fs = require('fs')
-const os = require('ora')
 const path = require('path')
 const util = require('util')
+const merge = require('deepmerge')
+const os = require('ora')
+const ini = require('ini')
 const rm = require('rimraf').sync
+const config = require('./config')
 
 const sleep = (time = 300, flag = true) =>
     new Promise((resolve, reject) =>
@@ -45,7 +48,6 @@ const upgrade = (version, num = 1) => {
 const geneDashLine = (str, len) =>
     padding(new Array(Math.max(2, len - str.length + 2)).join('-'))
 
-// 解析项目目录
 const parsePackage = async (dir = '.') => {
     const projectDir = process.cwd()
     const pkg = path.join(projectDir, dir, 'package.json')
@@ -59,6 +61,57 @@ const parsePackage = async (dir = '.') => {
 const writeFile = async (...args) =>
     await util.promisify(fs.writeFile)(...args)
 
+const readFile = async file => {
+    if (!await isExists(file)) {
+        return {}
+    }
+    return ini.parse(fs.readFileSync(file, 'utf-8'))
+}
+
+const parsePath = str => {
+    const segments = str ? str.split('.') : []
+    return obj => {
+        for (let i = 0; i < segments.length; i++) {
+            if (!obj) return
+            obj = obj[segments[i]]
+        }
+        return obj
+    }
+}
+
+const getConfig = async key => {
+    const { ...rest } = config
+    const dscrc = await readFile(rest.DSCRC)
+    return parsePath(key)(merge(rest, dscrc))
+}
+
+const parseObject = (str, value) => {
+    const result = {}
+    str.split('.').reduce((res, key, index, arr) => {
+        res[key] = index === arr.length - 1 ? value : {}
+        return res[key]
+    }, result)
+    return result
+}
+
+const setConfig = async (key = '', value = '') => {
+    const { DSCRC } = config
+    const cfg = merge(await getConfig(), parseObject(key, value))
+    await writeFile(DSCRC, JSON.stringify(cfg, null, 4))
+    return cfg
+}
+
+const delConfig = async key => {
+    const cfg = await getConfig()
+    let obj = cfg
+    key.split('.').forEach((key, index, arr) => {
+        index === arr.length - 1 ? delete obj[key] : (obj = obj[key])
+    })
+    const { DSCRC } = config
+    await writeFile(DSCRC, JSON.stringify(cfg, null, 4))
+    return cfg
+}
+
 module.exports = {
     rm,
     parsePackage,
@@ -69,5 +122,10 @@ module.exports = {
     isExists,
     geneDashLine,
     exec,
+    readFile,
     writeFile,
+    getConfig,
+    setConfig,
+    delConfig,
+    parsePath,
 }

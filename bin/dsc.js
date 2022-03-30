@@ -20,6 +20,15 @@ program
     .helpOption('-h, --help', '显示命令帮助')
     .addHelpCommand('help [command]', '显示命令帮助')
 
+// config 配置
+program
+    .command('config')
+    .description('配置管理')
+    .option('-s, --set <key> <value>', '修改配置')
+    .option('-g, --get [key]', '查询配置')
+    .option('-d, --del <key>', '查询配置')
+    .action(createRouter(require('../lib/config')))
+
 // 创建项目
 program
     .command('create')
