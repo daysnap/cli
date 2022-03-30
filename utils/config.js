@@ -1,9 +1,12 @@
 
 const path = require('path')
+const { version } = require('../package.json')
 
 const DSCRC = path.join(process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'], '.dscrc')
 
 module.exports = {
+
+    version,
 
     DSCRC,
 
