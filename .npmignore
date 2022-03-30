@@ -29,3 +29,5 @@ package-lock.json
 
 .husky
 commitlint.config.js
+
+docs
