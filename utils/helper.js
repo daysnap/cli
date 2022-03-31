@@ -87,7 +87,8 @@ const getConfig = async key => {
 
 const parseObject = (str, value) => {
     const result = {}
-    str.split('.').reduce((res, key, index, arr) => {
+    const segments = str ? str.split('.') : []
+    segments.reduce((res, key, index, arr) => {
         res[key] = index === arr.length - 1 ? value : {}
         return res[key]
     }, result)
