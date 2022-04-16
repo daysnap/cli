@@ -58,14 +58,20 @@ const parsePackage = async (dir = '.') => {
     return { ...require(pkg), pkg }
 }
 
-const writeFile = async (...args) =>
-    await util.promisify(fs.writeFile)(...args)
+const writeFile = async (path, data) => {
+    if (typeof data !== 'string') {
+        data = JSON.stringify(data)
+    }
+    await util.promisify(fs.writeFile)(path, data)
+}
 
 const readFile = async file => {
     if (!await isExists(file)) {
         return {}
     }
-    return ini.parse(fs.readFileSync(file, 'utf-8'))
+    let content = fs.readFileSync(file, 'utf-8')
+    try { content = JSON.parse(content) } catch  {}
+    return content
 }
 
 const parsePath = str => {
@@ -82,7 +88,7 @@ const parsePath = str => {
 const getConfig = async key => {
     const { ...rest } = config
     const dscrc = await readFile(rest.DSCRC)
-    return parsePath(key)(merge(rest, dscrc))
+    return parsePath(key)(merge(rest, ini.parse(dscrc)))
 }
 
 const parseObject = (str, value) => {
