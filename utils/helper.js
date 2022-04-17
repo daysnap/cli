@@ -67,11 +67,9 @@ const writeFile = async (path, data) => {
 
 const readFile = async file => {
     if (!await isExists(file)) {
-        return {}
+        return ''
     }
-    let content = fs.readFileSync(file, 'utf-8')
-    try { content = JSON.parse(content) } catch  {}
-    return content
+    return fs.readFileSync(file, 'utf-8')
 }
 
 const parsePath = str => {
