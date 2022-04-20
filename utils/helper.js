@@ -49,13 +49,13 @@ const geneDashLine = (str, len) =>
     padding(new Array(Math.max(2, len - str.length + 2)).join('-'))
 
 const parsePackage = async (dir = '.') => {
-    const projectDir = process.cwd()
-    const pkg = path.join(projectDir, dir, 'package.json')
+    const cwd = process.cwd()
+    const pkg = path.join(cwd, dir, 'package.json')
     await sleep(500)
     if (!await isExists(pkg)) {
         throw new Error(`解析项目错误 package.json 找不到（${pkg}）.`)
     }
-    return { ...require(pkg), pkg }
+    return { ...require(pkg), pkg, cwd }
 }
 
 const writeFile = async (path, data) => {
@@ -65,11 +65,13 @@ const writeFile = async (path, data) => {
     await util.promisify(fs.writeFile)(path, data)
 }
 
+const readFileSync = file => fs.readFileSync(file, 'utf-8')
+
 const readFile = async file => {
     if (!await isExists(file)) {
         return ''
     }
-    return fs.readFileSync(file, 'utf-8')
+    return readFileSync(file)
 }
 
 const parsePath = str => {
@@ -128,6 +130,7 @@ module.exports = {
     geneDashLine,
     exec,
     readFile,
+    readFileSync,
     writeFile,
     getConfig,
     setConfig,

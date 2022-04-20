@@ -20,6 +20,13 @@ program
     .helpOption('-h, --help', '显示命令帮助')
     .addHelpCommand('help [command]', '显示命令帮助')
 
+// build 打包 只支持 gulp 编译工具库
+program
+    .command('build')
+    .description('编译工具库')
+    .option('-c, --config <config-file>', '指定配置文件')
+    .action(createRouter(require('../lib/build')))
+
 // config 配置
 program
     .command('config')

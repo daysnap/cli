@@ -27,10 +27,18 @@
   },
   "homepage": "https://github.com/daysnap/daysnap-cli#readme",
   "dependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
     "chalk": "^4.1.2",
     "commander": "^7.2.0",
     "deepmerge": "^4.2.2",
     "git-clone": "^0.2.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-if": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "ini": "^2.0.0",
     "inquirer": "^8.2.0",
     "launch-editor": "^2.3.0",
@@ -41,6 +49,7 @@
     "request": "^2.88.2",
     "rimraf": "^3.0.2",
     "semver": "^7.3.5",
+    "typescript": "^4.6.3",
     "user-home": "^3.0.0"
   },
   "engines": {
@@ -56,6 +65,7 @@
     "@vuepress/plugin-nprogress": "^1.9.7",
     "commitizen": "^4.2.4",
     "husky": "^7.0.4",
+    "slash2": "^2.0.0",
     "vuepress": "^1.9.7"
   }
 }
