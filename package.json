@@ -70,6 +70,7 @@
     "@commitlint/config-conventional": "^16.2.1",
     "@vuepress/plugin-nprogress": "^1.9.7",
     "commitizen": "^4.2.4",
+    "gulp-autoprefixer": "^8.0.0",
     "husky": "^7.0.4",
     "vuepress": "^1.9.7"
   }
