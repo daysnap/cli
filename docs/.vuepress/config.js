@@ -4,7 +4,7 @@ module.exports = {
     title: 'DaySnap CLI',
     description: 'One Day One Snap',
     // base: '/',
-    base: '/daysnap-cli/',
+    base: '/cli/',
     dest: 'dist',
     host: '0.0.0.0',
     port: '12580',
