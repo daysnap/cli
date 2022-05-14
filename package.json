@@ -1,6 +1,6 @@
 {
   "name": "@daysnap/cli",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "工具脚手架",
   "main": "index.js",
   "scripts": {
@@ -43,6 +43,7 @@
     "gulp-if": "^3.0.0",
     "gulp-sass": "^5.1.0",
     "gulp-typescript": "^6.0.0-alpha.1",
+    "gulp-autoprefixer": "^8.0.0",
     "ini": "^2.0.0",
     "inquirer": "^8.2.0",
     "launch-editor": "^2.3.0",
@@ -70,7 +71,6 @@
     "@commitlint/config-conventional": "^16.2.1",
     "@vuepress/plugin-nprogress": "^1.9.7",
     "commitizen": "^4.2.4",
-    "gulp-autoprefixer": "^8.0.0",
     "husky": "^7.0.4",
     "vuepress": "^1.9.7"
   }
