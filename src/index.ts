@@ -1,3 +1,1 @@
-import { test } from './utils'
-
-test()
+export * from './core'
