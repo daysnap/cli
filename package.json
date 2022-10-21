@@ -7,6 +7,7 @@
     "dsc": "./bin/dsc.js"
   },
   "scripts": {
+    "dev": "ts-node --project ./tsconfig.json ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "lint": "eslint 'src/**/*.{js,ts}' --fix",
