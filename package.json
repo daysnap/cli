@@ -1,8 +1,11 @@
 {
-  "name": "cli",
-  "version": "1.0.0",
+  "name": "@daysnap/cli",
+  "version": "0.0.8",
   "description": "工具脚手架",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "bin": {
+    "dsc": "./bin/dsc.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint 'src/**/*.{js,ts}' --fix",
@@ -40,7 +43,6 @@
     "husky": "^7.0.4",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4"
   },
@@ -48,6 +50,7 @@
     "chalk": "^5.1.2",
     "commander": "^9.4.1",
     "deepmerge": "^4.2.2",
+    "rimraf": "^3.0.2",
     "inquirer": "^9.1.4",
     "ora": "^6.1.2"
   },
