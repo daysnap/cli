@@ -1,0 +1,6 @@
+/node_modules
+/bin
+/lib
+.eslintrc.js
+commitlint.config.js
+.prettierrc.js
