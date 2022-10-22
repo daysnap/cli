@@ -39,5 +39,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'no-prototype-builtins': 'off',
     'no-shadow': 'off',
+
+    'import/no-unresolved': 'off',
   },
 }

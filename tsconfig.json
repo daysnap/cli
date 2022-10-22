@@ -4,6 +4,11 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "baseUrl": "./",
+    "paths": {
+      "src": [
+        "./src/*"
+      ]
+    },
     "jsx": "preserve",
     "declaration": true,
     "skipLibCheck": true,

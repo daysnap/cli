@@ -1,5 +1,7 @@
 import { program } from 'commander'
+import { defineCommand } from 'src/core'
 
+console.log('npmnpmnpmnpmnpm')
 program
   .usage('npm')
   .description('快速切换 npm 源')
@@ -8,3 +10,5 @@ program
   .action(() => {
     console.log('切换 npm 源了')
   })
+
+export default defineCommand()
