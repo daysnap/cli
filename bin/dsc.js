@@ -71,6 +71,8 @@ program
     .description('发布 npm 包，会自动默认处理 version 版本')
     .option('-r, --registry <registry>', '指定发布源')
     .option('-v, --version <version>', '指定发布的对应版本')
+    .option('-p, --push', '推送代码到GIT仓库')
+    .option('-t, --tag [version]', '指定tag版本，指定tag则默认会推送代码到git仓库')
     .action(createRouter(require('../lib/publish')))
 
 // 处理未知命令
