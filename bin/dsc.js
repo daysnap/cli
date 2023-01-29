@@ -51,6 +51,15 @@ program
     .option('-u, --username <username>', '指定用户')
     .action(createRouter(require('../lib/create')))
 
+// 模板创建
+program
+    .command('template')
+    .description('创建模板')
+    .usage('<app-name> -t <template>')
+    .option('-t, --template <template>', '指定生成的模板')
+    .option('-l, --list', '当前的模板列表')
+    .action(createRouter(require('../lib/create')))
+
 // husky 辅助
 program
     .command('husky')
