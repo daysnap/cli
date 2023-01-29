@@ -1,78 +1,21 @@
 {
   "name": "@daysnap/cli",
-  "version": "0.0.12",
+  "version": "0.0.1",
   "description": "工具脚手架",
   "main": "index.js",
   "scripts": {
-    "dev": "vuepress dev docs",
-    "release": "dsc publish -t",
-    "build": "vuepress build docs",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install && echo 'export PATH=\"/usr/local/bin/:$PATH\"' >> ~/.huskyrc"
+    "release": "dsc publish -t"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/daysnap/daysnap-cli.git"
+    "url": "git+https://github.com/daysnap/cli.git"
   },
-  "keywords": [
-    "daysnap",
-    "cli"
-  ],
+  "keywords": [],
   "author": "woshiajuana",
   "license": "MIT",
-  "bin": {
-    "dsc": "./bin/dsc.js"
-  },
   "bugs": {
-    "url": "https://github.com/daysnap/daysnap-cli/issues"
+    "url": "https://github.com/daysnap/cli/issues"
   },
-  "homepage": "https://github.com/daysnap/daysnap-cli#readme",
-  "dependencies": {
-    "@babel/core": "^7.17.9",
-    "@babel/plugin-proposal-class-properties": "^7.16.7",
-    "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "@babel/preset-typescript": "^7.16.7",
-    "chalk": "^4.1.2",
-    "commander": "^7.2.0",
-    "deepmerge": "^4.2.2",
-    "git-clone": "^0.2.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-cssnano": "^2.1.3",
-    "gulp-if": "^3.0.0",
-    "gulp-sass": "^5.1.0",
-    "gulp-typescript": "^6.0.0-alpha.1",
-    "ini": "^2.0.0",
-    "inquirer": "^8.2.0",
-    "launch-editor": "^2.3.0",
-    "leven": "^3.1.0",
-    "metalsmith": "^2.3.0",
-    "minimist": "^1.2.5",
-    "ora": "^5.4.1",
-    "request": "^2.88.2",
-    "rimraf": "^3.0.2",
-    "sass": "^1.50.1",
-    "semver": "^7.3.5",
-    "through2": "^4.0.2",
-    "typescript": "^4.6.3",
-    "user-home": "^3.0.0"
-  },
-  "engines": {
-    "node": "^12.0.0 || >= 14.0.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^16.2.1",
-    "@commitlint/config-conventional": "^16.2.1",
-    "@vuepress/plugin-nprogress": "^1.9.7",
-    "commitizen": "^4.2.4",
-    "husky": "^7.0.4",
-    "vuepress": "^1.9.7"
-  }
+  "homepage": "https://github.com/daysnap/cli#readme"
 }
