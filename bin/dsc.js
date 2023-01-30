@@ -2,3 +2,4 @@
 
 'use strict'
 
+require('../dist/cli')
