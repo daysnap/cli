@@ -2,9 +2,10 @@
   "name": "@daysnap/cli",
   "version": "0.0.1",
   "description": "工具脚手架",
-  "main": "index.js",
-  "bin": "./bin/dsc.js",
+  "main": "dist/index.js",
+  "bin": "bin/dsc.js",
   "scripts": {
+    "dev": "tsc --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "dsc publish -t"
   },
