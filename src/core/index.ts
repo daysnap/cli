@@ -1,3 +1,2 @@
-export const test = () => {
-  console.log('test => ', 1)
-}
+export * from './createCommand'
+export * from './createRouter'
