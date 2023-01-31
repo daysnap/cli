@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "bin": "bin/dsc.js",
   "scripts": {
-    "tsc": "tsc --watch",
+    "tsc": "npm run clean && tsc --watch",
+    "clean": "rimraf ./dist",
     "dev": "node ./bin/dsc.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "dsc publish -t"
@@ -47,6 +48,7 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.3",
+    "rimraf": "^4.1.2",
     "typescript": "^4.9.4"
   },
   "dependencies": {
@@ -55,7 +57,7 @@
     "figlet": "^1.5.2",
     "ini": "^3.0.1",
     "inquirer": "^9.1.4",
-    "leven": "^4.0.0",
+    "leven": "^3.1.0",
     "minimist": "^1.2.7",
     "module-alias": "^2.2.2",
     "node-dir": "^0.1.17",

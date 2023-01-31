@@ -39,7 +39,7 @@
     // "typeRoots": [],                                  /*指定多个类似于`xxx的文件夹/节点_modules/@types`——typeRoots用来指定声明文件或文件夹的路径列表，如果指定了此项，则只有在这里列出的声明文件才会被加载*/
     // "types": [],                                      /*指定要包含的类型包名称，而不在源文件中引用——types用来指定需要包含的模块，只有在这里列出的模块的声明文件才会被加载进来*/
     // "allowUmdGlobalAccess": true,                     /*允许从模块访问UMD全局——不把符号链接解析为真实路径，具体可以了解下webpack和node.js的symlink相关知识*/
-    "resolveJsonModule": true,                        /*启用导入。json文件*/
+    // "resolveJsonModule": true,                        /*启用导入。json文件*/
     // "noResolve": true,                                /*禁止`import`s、`require`s或`reference>`s扩展TypeScript应添加到项目中的文件数*/
 
     /*JavaScript支持*/

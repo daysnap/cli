@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import { Command } from 'commander'
-import { Plugin } from '@/types'
 import { br, error } from './logger'
+import { createCommand } from './createCommand'
 
 const o = (fn: string, cb: (...args: any[]) => void) => (program: Command) => {
   ;(program as any).Command.prototype[fn] = function (...args: any[]) {
@@ -19,25 +19,23 @@ const o = (fn: string, cb: (...args: any[]) => void) => (program: Command) => {
 }
 
 const unknownOption = o('unknownOption', (optionName) =>
-  error(`未知选项 ${chalk.yellow(optionName)} .`),
+  error(`未知选项 ${chalk.yellow(optionName)}.`),
 )
 
 const missingArgument = o('missingArgument', (argName) =>
-  error(`缺少必需参数 ${chalk.yellow(`<${argName}>`)} .`),
+  error(`缺少必需参数 ${chalk.yellow(`<${argName}>`)}.`),
 )
 
 const optionMissingArgument = o('optionMissingArgument', (option, flag) =>
   error(
     `缺少选项的必需参数 ${chalk.yellow(option.flags)}${
       flag ? `，得到了 ${chalk.yellow(flag)}` : ``
-    } .`,
+    }.`,
   ),
 )
 
-export const overwrite: Plugin = {
-  install({ program }) {
-    unknownOption(program)
-    missingArgument(program)
-    optionMissingArgument(program)
-  },
-}
+export const overwrite = createCommand(({ program }) => {
+  unknownOption(program)
+  missingArgument(program)
+  optionMissingArgument(program)
+})
