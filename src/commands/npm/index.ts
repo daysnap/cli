@@ -1,4 +1,6 @@
-import { createCommand } from '@/core'
+import { createCommand, createRouter } from '@/core'
+
+export * from './routes'
 
 export default createCommand(({ program }) => {
   program
@@ -6,7 +8,6 @@ export default createCommand(({ program }) => {
     .description('快速切换 npm 源')
     .option('-l, --list', '列出当前支持的 npm 源')
     .option('-u, --use <name>', '切换 npm 源')
-    .action(() => {
-      console.log('执行 npm')
-    })
-}, 2)
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    .action(createRouter(require('./routes')))
+})

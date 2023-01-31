@@ -8,7 +8,6 @@ export function createCli(argv?: string[], options?: ParseOptions): Cli {
   const bootstrap: Cli['bootstrap'] = (dirname) => {
     use(prefix)
 
-    // 集成 commands
     const ctx = requireContext(dirname, /index\.js$/)
     ctx
       .keys()
