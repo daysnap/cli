@@ -1,5 +1,6 @@
 export * from './createCli'
 export * from './createCommand'
+export * from './createRoute'
 export * from './createRouter'
 export * from './logger'
 export * from './overwrite'
