@@ -1,5 +1,6 @@
 import chalk from 'chalk'
 import { Command } from 'commander'
+import { Plugin } from '@/types'
 import { br, error } from './logger'
 
 const o = (fn: string, cb: (...args: any[]) => void) => (program: Command) => {
@@ -33,8 +34,10 @@ const optionMissingArgument = o('optionMissingArgument', (option, flag) =>
   ),
 )
 
-export function overwrite(program: Command) {
-  unknownOption(program)
-  missingArgument(program)
-  optionMissingArgument(program)
+export const overwrite: Plugin = {
+  install({ program }) {
+    unknownOption(program)
+    missingArgument(program)
+    optionMissingArgument(program)
+  },
 }

@@ -1,5 +1,10 @@
 import { Cli } from './cli'
 
+export interface PluginFunction {
+  (cli: Cli, ...options: any[]): void
+}
+
 export interface Plugin {
-  install: (cli: Cli, ...options: any[]) => void
+  sort?: number
+  install: PluginFunction
 }

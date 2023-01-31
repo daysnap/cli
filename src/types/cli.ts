@@ -2,7 +2,8 @@ import { Command, ParseOptions } from 'commander'
 import { Plugin } from './plugin'
 
 export interface Cli {
-  use: (plugin: Plugin, ...options: any[]) => void
+  bootstrap: (dirname: string) => void
+  use: (plugin: Plugin, ...options: any[]) => Cli
   program: Command
   argv?: string[]
   options?: ParseOptions

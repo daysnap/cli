@@ -1,5 +1,6 @@
-import { createCli } from '.'
+import path from 'path'
+import { createCli, overwrite } from '.'
 
-const cli = createCli(process.argv)
-
-const d = requireAll()
+createCli(process.argv)
+  .use(overwrite)
+  .bootstrap(path.join(__dirname, './commands'))
