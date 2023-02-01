@@ -1,3 +1,6 @@
+import { Context } from './context'
+
 export interface Route {
-  <T>(options: T): void
+  (ctx: Context): void
+  alias?: string
 }

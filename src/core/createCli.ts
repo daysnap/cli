@@ -31,7 +31,8 @@ export function createCli(argv: string[], options?: ParseOptions): Cli {
   const context: Context = {
     program,
     argv,
-    args: minimist(argv.slice(2)),
+    parseArgv: () => minimist(argv.slice(2)),
+    args: [],
   }
 
   const cli = { use, context, options, bootstrap }

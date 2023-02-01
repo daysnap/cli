@@ -1,8 +1,12 @@
-import { Route } from '@/types'
+import { Context, Route } from '@/types'
 
-export const createRoute =
-  (routes: Route | Record<string, Route>) =>
-  (...args: any[]) => {
-    console.log('routes => ', routes)
-    console.log('args => ', args[0], args.length)
-  }
+export const createRoute = (
+  fn: (ctx: Context) => void,
+  alias?: string,
+): Route => {
+  const route: Route = fn as Route
+
+  route.alias = alias
+
+  return route
+}
