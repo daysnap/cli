@@ -1,10 +1,11 @@
 import { ParseOptions, program } from 'commander'
-import { Cli } from '@/types'
+import minimist from 'minimist'
+import { Cli, Context } from '@/types'
 import { requireContext } from '@/utils'
 import { prefix } from './prefix'
 import { suffix } from './suffix'
 
-export function createCli(argv?: string[], options?: ParseOptions): Cli {
+export function createCli(argv: string[], options?: ParseOptions): Cli {
   const bootstrap: Cli['bootstrap'] = (dirname) => {
     use(prefix)
 
@@ -23,11 +24,17 @@ export function createCli(argv?: string[], options?: ParseOptions): Cli {
   }
 
   const use: Cli['use'] = (plugin, ...options) => {
-    plugin.install(cli, ...options)
+    plugin.install(context, ...options)
     return cli
   }
 
-  const cli = { use, program, argv, options, bootstrap }
+  const context: Context = {
+    program,
+    argv,
+    args: minimist(argv.slice(2)),
+  }
+
+  const cli = { use, context, options, bootstrap }
 
   return cli
 }

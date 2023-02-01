@@ -1,7 +1,7 @@
-import { Cli } from './cli'
+import { Context } from './context'
 
 export interface PluginFunction {
-  (cli: Cli, ...options: any[]): void
+  (ctx: Context, ...options: any[]): void
 }
 
 export interface Plugin {

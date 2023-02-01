@@ -1,4 +1,5 @@
 export * from './cli'
+export * from './context'
 export * from './looser'
 export * from './numeric'
 export * from './plugin'

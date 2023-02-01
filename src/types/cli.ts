@@ -1,10 +1,10 @@
-import { Command, ParseOptions } from 'commander'
+import { ParseOptions } from 'commander'
 import { Plugin } from './plugin'
+import { Context } from './context'
 
 export interface Cli {
   bootstrap: (dirname: string) => void
   use: (plugin: Plugin, ...options: any[]) => Cli
-  program: Command
-  argv?: string[]
+  context: Context
   options?: ParseOptions
 }
