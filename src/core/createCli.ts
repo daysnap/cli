@@ -9,10 +9,10 @@ export function createCli(argv: string[], options?: ParseOptions): Cli {
   const bootstrap: Cli['bootstrap'] = (dirname) => {
     use(prefix)
 
-    const ctx = requireContext(dirname, /index\.js$/)
+    const ctx = requireContext(dirname, /\.js$/)
     ctx
       .keys()
-      .filter((k) => !k.includes(`${dirname}/index.js`))
+      // .filter((k) => !k.includes(`${dirname}/index.js`))
       .map((k) => ctx(k).default)
       .filter((item) => item && item.install)
       .sort((x, y) => x.sort - y.sort)

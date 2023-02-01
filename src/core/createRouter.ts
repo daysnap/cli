@@ -17,6 +17,10 @@ export const createRouter =
       return next
     })
 
+    if (routes['default']) {
+      next = routes['default']
+    }
+
     if (!next) {
       return ctx.program.outputHelp()
     }
