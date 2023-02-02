@@ -6,9 +6,11 @@ export interface Context {
   readonly program: Command
   readonly argv: string[]
   readonly parseArgv: () => ParsedArgs
+  readonly parseRestArgv: () => ParsedArgs['_']
   args: any[]
+  options: Record<string, any>
   readonly config: Looser<{
-    get<T = any>(key?: string): Promise<T>
+    get<T = any>(path?: string): Promise<T>
     HOME_DSCRC: string
     PROJECT_ROOT_DSCRC: string
     CWD_DSCRC: string

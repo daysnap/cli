@@ -9,7 +9,7 @@ import {
   PROJECT_ROOT_DSCRC,
 } from './default'
 
-export async function getConfig<T = any>(key = '') {
+export async function getConfig<T = any>(path = '') {
   return parsePath<Promise<T>>(
     [PROJECT_ROOT_DSCRC, HOME_DSCRC, CWD_DSCRC].reduce<Record<string, any>>(
       async (res, filepath) => {
@@ -20,6 +20,6 @@ export async function getConfig<T = any>(key = '') {
       },
       DEFAULT_CONFIG,
     ),
-    key,
+    path,
   )
 }

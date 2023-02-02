@@ -5,6 +5,7 @@ export const createRouter =
   (...args: any[]) => {
     const [, options] = [...args].reverse()
     ctx.args = args.slice(0, -1)
+    ctx.options = options
 
     let next: Route | undefined
     Object.keys(options).find((key) => {
@@ -12,6 +13,9 @@ export const createRouter =
 
       if (!next) {
         next = routes[key]
+      }
+      if (!next) {
+        next = routes[`on${key[0].toLocaleUpperCase()}${key.substring(1)}`]
       }
 
       return next

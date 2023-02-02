@@ -31,11 +31,15 @@ export function createCli(argv: string[], options?: ParseOptions): Cli {
     return cli
   }
 
+  const parseArgv = () => minimist(argv.slice(3))
+  const parseRestArgv = () => parseArgv()._
   const context: Context = {
     program,
     argv,
-    parseArgv: () => minimist(argv.slice(2)),
+    parseArgv,
+    parseRestArgv,
     args: [],
+    options: {},
     config: {
       get: getConfig,
       HOME_DSCRC,
