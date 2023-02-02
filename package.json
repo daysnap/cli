@@ -62,7 +62,7 @@
     "minimist": "^1.2.7",
     "module-alias": "^2.2.2",
     "node-dir": "^0.1.17",
-    "ora": "^6.1.2"
+    "ora": "^5.4.1"
   },
   "_moduleAliases": {
     "@": "./dist/"

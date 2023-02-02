@@ -17,7 +17,7 @@ export const createRouter =
       return next
     })
 
-    if (routes['default']) {
+    if (!next && routes['default']) {
       next = routes['default']
     }
 
