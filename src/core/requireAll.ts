@@ -1,6 +1,4 @@
-import { requireContext } from './requireContext'
-
-export type RC = ReturnType<typeof requireContext>
+import { RC } from './requireContext'
 
 export function requireAll(rc: RC) {
   return rc

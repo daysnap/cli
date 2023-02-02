@@ -2,8 +2,10 @@ import { ParseOptions, program } from 'commander'
 import minimist from 'minimist'
 import { Cli, Context } from '@/types'
 import { requireContext } from './requireContext'
+import { requireConfig } from './requireConfig'
 import { prefix } from './prefix'
 import { suffix } from './suffix'
+import { getConfig, HOME_DSCRC, CWD_DSCRC, PROJECT_ROOT_DSCRC } from './config'
 
 export function createCli(argv: string[], options?: ParseOptions): Cli {
   const bootstrap: Cli['bootstrap'] = (dirname) => {
@@ -19,6 +21,8 @@ export function createCli(argv: string[], options?: ParseOptions): Cli {
 
     use(suffix)
 
+    requireConfig(requireContext(dirname, /config.js$/))
+
     program.parse(argv, options)
   }
 
@@ -32,6 +36,12 @@ export function createCli(argv: string[], options?: ParseOptions): Cli {
     argv,
     parseArgv: () => minimist(argv.slice(2)),
     args: [],
+    config: {
+      get: getConfig,
+      HOME_DSCRC,
+      CWD_DSCRC,
+      PROJECT_ROOT_DSCRC,
+    },
   }
 
   const cli = { use, context, options, bootstrap }
