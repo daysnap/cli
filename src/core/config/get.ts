@@ -11,7 +11,7 @@ import {
 
 export async function getConfig<T = any>(path = '') {
   return parsePath<Promise<T>>(
-    await [PROJECT_ROOT_DSCRC, 'HOME_DSCRC', CWD_DSCRC].reduce<
+    await [PROJECT_ROOT_DSCRC, HOME_DSCRC, CWD_DSCRC].reduce<
       Promise<Record<string, any>>
     >(async (res: any, filepath) => {
       if (await isExists(filepath)) {
