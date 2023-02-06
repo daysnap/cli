@@ -35,6 +35,7 @@ export function createCli(argv: string[], options?: ParseOptions): Cli {
   const parseRestArgv = () => parseArgv()._
   const context: Context = {
     program,
+    command: program,
     argv,
     parseArgv,
     parseRestArgv,

@@ -9,7 +9,7 @@ export const onSet = createRoute(async (ctx) => {
   const [value] = parseRestArgv()
   const { set: key } = options
   if (!key || !value) {
-    return program.outputHelp()
+    return ctx.command.outputHelp()
   }
   const config = merge(await configServer.get(), parseObject(key, value))
   await writeFile(configServer.CWD_DSCRC, ini.stringify(config))

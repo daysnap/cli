@@ -3,9 +3,10 @@ import { Context, Route } from '@/types'
 export const createRouter =
   (ctx: Context, routes: Record<string, Route>) =>
   (...args: any[]) => {
-    const [, options] = [...args].reverse()
+    const [command, options] = [...args].reverse()
     ctx.args = args.slice(0, -1)
     ctx.options = options
+    ctx.command = command
 
     let next: Route | undefined
     Object.keys(options).find((key) => {
@@ -26,7 +27,7 @@ export const createRouter =
     }
 
     if (!next) {
-      return ctx.program.outputHelp()
+      return ctx.command.outputHelp()
     }
 
     next(ctx)

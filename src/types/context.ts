@@ -4,6 +4,7 @@ import { Looser } from './looser'
 
 export interface Context {
   readonly program: Command
+  command: Command
   readonly argv: string[]
   readonly parseArgv: () => ParsedArgs
   readonly parseRestArgv: () => ParsedArgs['_']
