@@ -11,15 +11,14 @@ import {
 
 export async function getConfig<T = any>(path = '') {
   return parsePath<Promise<T>>(
-    [PROJECT_ROOT_DSCRC, HOME_DSCRC, CWD_DSCRC].reduce<Record<string, any>>(
-      async (res, filepath) => {
-        if (await isExists(filepath)) {
-          res = merge(res, ini.parse(await readFile(filepath)))
-        }
-        return res
-      },
-      DEFAULT_CONFIG,
-    ),
+    await [PROJECT_ROOT_DSCRC, 'HOME_DSCRC', CWD_DSCRC].reduce<
+      Promise<Record<string, any>>
+    >(async (res: any, filepath) => {
+      if (await isExists(filepath)) {
+        res = merge(await res, ini.parse(await readFile(filepath)))
+      }
+      return await res
+    }, Promise.resolve(DEFAULT_CONFIG)),
     path,
   )
 }
