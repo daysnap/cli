@@ -9,7 +9,7 @@ export interface Context {
   readonly parseRestArgv: () => ParsedArgs['_']
   args: any[]
   options: Record<string, any>
-  readonly config: Looser<{
+  readonly configServer: Looser<{
     get<T = any>(path?: string): Promise<T>
     HOME_DSCRC: string
     PROJECT_ROOT_DSCRC: string

@@ -40,7 +40,7 @@ export function createCli(argv: string[], options?: ParseOptions): Cli {
     parseRestArgv,
     args: [],
     options: {},
-    config: {
+    configServer: {
       get: getConfig,
       HOME_DSCRC,
       CWD_DSCRC,
