@@ -2,13 +2,19 @@ import { createCommand, createRouter, requireAll, requireContext } from '@/core'
 
 export default createCommand((ctx) => {
   ctx.program
-    .command('oss')
-    .description('oss 上传')
-    .option('-s, --set <path> <value>', '修改配置')
-    .option('-g, --get <path>', '查询配置')
-    .option('-d, --del <path>', '删除配置')
-    .option('-e, --edit', '使用默认编辑器打开配置')
-    .option('--json', 'JSON 的形式展示配置')
+    .command('oss [input] [output]')
+    .description(
+      'oss 上传文件，[input]需要上传的文件夹，[output]的格式为:[<region><:bucket><:output>[:accessKeyId][:accessKeySecret]]',
+    )
+    .option(
+      '-c, --config <filepath>',
+      '指定配置文件',
+      `${process.cwd()}/.dsc.config`,
+    )
+    .option(
+      '-i, --ignore <filepath...>',
+      '忽略哪些目录、文件不需要上传，glob 形式',
+    )
     .action(
       createRouter(ctx, requireAll(requireContext(__dirname, /\/on.*\.js$/))),
     )

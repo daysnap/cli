@@ -12,7 +12,7 @@ export const onDel = createRoute(async (ctx) => {
     index === arr.length - 1 ? delete obj[key] : (obj = obj[key])
   })
 
-  await writeFile(configServer.CWD_DSCRC, ini.stringify(config))
+  await writeFile(configServer.HOME_DSCRC, ini.stringify(config))
 
   logger.success(`删除成功：${key}`)
 })

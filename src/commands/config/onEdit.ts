@@ -6,10 +6,10 @@ import { launch } from '@/utils/launch'
 export const onEdit = createRoute(async (ctx) => {
   const { configServer } = ctx
 
-  if (await isExists(configServer.CWD_DSCRC)) {
+  if (await isExists(configServer.HOME_DSCRC)) {
     const config = await configServer.get()
-    await writeFile(configServer.CWD_DSCRC, ini.stringify(config))
+    await writeFile(configServer.HOME_DSCRC, ini.stringify(config))
   }
 
-  await launch(configServer.CWD_DSCRC)
+  await launch(configServer.HOME_DSCRC)
 })
