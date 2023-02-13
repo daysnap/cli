@@ -14,10 +14,9 @@ export const onSet = createRoute(async (ctx) => {
   }
 
   const config = merge(
-    await configServer.get('', [
-      configServer.PROJECT_ROOT_DSCRC,
-      configServer.HOME_DSCRC,
-    ]),
+    await configServer.get('', {
+      range: [configServer.PROJECT_ROOT_DSCRC, configServer.HOME_DSCRC],
+    }),
     parseObject(key, value),
   )
   await writeFile(configServer.HOME_DSCRC, ini.stringify(config))
