@@ -1,4 +1,10 @@
-export const config = {
+export interface Config {
+  npm: {
+    registry: Record<string, { home: string; registry: string }>
+  }
+}
+
+export const config: Config = {
   npm: {
     registry: {
       npm: {

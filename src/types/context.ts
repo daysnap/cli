@@ -1,6 +1,6 @@
 import { Command } from 'commander'
 import { ParsedArgs } from 'minimist'
-import { Looser } from './looser'
+import { Looser } from './Looser'
 
 export interface Context {
   readonly program: Command

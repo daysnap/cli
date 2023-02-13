@@ -9,7 +9,7 @@ export default createCommand((ctx) => {
     .option(
       '-c, --config <filepath>',
       '指定配置文件',
-      `${process.cwd()}/.dsc.config`,
+      `${process.cwd()}/.dsc.config.js`,
     )
     .option(
       '-i, --ignore <filepath...>',
