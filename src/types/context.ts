@@ -11,7 +11,13 @@ export interface Context {
   args: any[]
   options: Record<string, any>
   readonly configServer: Looser<{
-    get<T = any>(path?: string): Promise<T>
+    get<T = any>(
+      path?: string,
+      options?: {
+        append?: string[]
+        range?: string[]
+      },
+    ): Promise<T>
     HOME_DSCRC: string
     PROJECT_ROOT_DSCRC: string
     CWD_DSCRC: string

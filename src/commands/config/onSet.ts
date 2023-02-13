@@ -13,7 +13,13 @@ export const onSet = createRoute(async (ctx) => {
     return ctx.command.outputHelp()
   }
 
-  const config = merge(await configServer.get(), parseObject(key, value))
+  const config = merge(
+    await configServer.get('', [
+      configServer.PROJECT_ROOT_DSCRC,
+      configServer.HOME_DSCRC,
+    ]),
+    parseObject(key, value),
+  )
   await writeFile(configServer.HOME_DSCRC, ini.stringify(config))
 
   logger.success(`设置成功：${key} => ${value}`)
