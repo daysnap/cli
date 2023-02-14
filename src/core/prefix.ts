@@ -6,7 +6,7 @@ export const prefix = createCommand(({ program }) => {
   program
     .name(name)
     .usage(`<command> [options]`)
-    .version(version, '-v, --version', '查看版本信息')
+    .version(`${name} ${version}`, '-v, --version', '查看版本信息')
     .helpOption('-h, --help', '显示命令帮助')
     .addHelpCommand('help [command]', '显示命令帮助')
 })

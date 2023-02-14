@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "工具脚手架",
   "main": "dist/index.js",
-  "bin": "bin/dsc.js",
+  "bin": {
+    "dsc": "bin/dsc.js"
+  },
   "scripts": {
     "build": "npm run clean && tsc --watch",
     "clean": "rimraf ./dist",

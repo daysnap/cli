@@ -13,5 +13,6 @@ export function getAbsolutePath(filepath: string) {
     res = path.join(basePath, normalizePath(filepath))
   }
 
-  return res.replace(/[-^$*+?.()|[\]{}]/g, '\\$&')
+  // return res.replace(/[-^$*+?.()|[\]{}]/g, '\\$&')
+  return res.replace('/**', '/').replace('/*', '/')
 }

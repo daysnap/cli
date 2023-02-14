@@ -1,4 +1,3 @@
-import merge from 'deepmerge'
 import glob from 'glob'
 import OSS from 'ali-oss'
 import path from 'path'
@@ -50,6 +49,7 @@ export default createRoute(async (ctx) => {
 
   // format path
   const basePath = getBasePath(input)
+
   if (basePath.includes('*')) {
     throw new Error(`路径错误：${basePath}`)
   }
@@ -64,13 +64,12 @@ export default createRoute(async (ctx) => {
       dot, // 显式点将始终匹配点文件
     })
     .map((filepath) => {
-      const relativePath = path.relative(basePath, filepath)
-      if (relativePath.startsWith('..')) {
-        throw new Error(`相对路径计算有误：${relativePath}`)
+      if (!filepath.includes(basePath)) {
+        throw new Error(`路径计算有误：${basePath}`)
       }
       return {
         filepath,
-        uploadPath: path.join(output.directory, relativePath),
+        uploadPath: path.join(output.directory, filepath.replace(basePath, '')),
       }
     })
 
