@@ -1,8 +1,9 @@
 import { Context, Route } from '@/types'
+import { error } from './logger'
 
 export const createRouter =
   (ctx: Context, routes: Record<string, Route>) =>
-  (...args: any[]) => {
+  async (...args: any[]) => {
     const [command, options] = [...args].reverse()
     ctx.args = args.slice(0, -1)
     ctx.options = options
@@ -30,5 +31,10 @@ export const createRouter =
       return ctx.command.outputHelp()
     }
 
-    next(ctx)
+    try {
+      await next(ctx)
+    } catch (err) {
+      ctx.command.outputHelp()
+      error(err)
+    }
   }

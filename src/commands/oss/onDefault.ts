@@ -1,13 +1,23 @@
-import { createRoute } from '@/core'
+import { createRoute, logger } from '@/core'
+import { getAbsolutePath, isExists } from '@/utils'
 
 // 获取配置
 function getOssConfig(filepath: string) {
   //
 }
 
-export default createRoute((ctx) => {
+export default createRoute(async (ctx) => {
   const { program } = ctx
-  const [input, output, { config }] = ctx.args
+  let [input, output, { config }] = ctx.args
+
+  if (config) {
+    config = getAbsolutePath(config)
+
+    if (!(await isExists(config))) {
+      // logger.error(`没有找到配置文件：${config}`)
+      throw new Error(`没有找到配置文件：${config}`)
+    }
+  }
   // const config = requireFile('.')
   // 格式化参数
   if (output) {
