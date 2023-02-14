@@ -28,7 +28,7 @@ export async function getConfig<T = any>(
         ...(options?.append ?? []),
       ]
     ).reduce<Promise<Record<string, any>>>(async (res: any, filepath) => {
-      if (await isExists(filepath)) {
+      if (await isExists(filepath ?? '')) {
         const ext = path.extname(filepath)
         let data: any
         if (['.json', '.js', '.mjs'].includes(ext)) {

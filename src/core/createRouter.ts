@@ -1,5 +1,6 @@
 import { Context, Route } from '@/types'
 import { error } from './logger'
+import { spinner } from '@/utils'
 
 export const createRouter =
   (ctx: Context, routes: Record<string, Route>) =>
@@ -36,5 +37,8 @@ export const createRouter =
     } catch (err) {
       ctx.command.outputHelp()
       error(err)
+    }
+    if (spinner.isSpinning) {
+      spinner.stop()
     }
   }
