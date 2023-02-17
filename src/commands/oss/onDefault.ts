@@ -6,8 +6,8 @@ import { getAbsolutePath, isExists, spinner } from '@/utils'
 import { getBasePath } from './utils'
 
 export default createRoute(async (ctx) => {
-  const { configServer } = ctx
-  let [input, output, { config, ignore = [], dot = false }] = ctx.args
+  const { configServer, args } = ctx
+  let [input, output, { config, ignore = [], dot = false }] = args
 
   // config
   if (config) {
