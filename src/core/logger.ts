@@ -15,6 +15,9 @@ export const print = (messages: any) => {
 
 export const error = (err: any) => {
   console.error(`  ${chalk.bgRed(padding('ERROR'))} ${chalk.red(err)}`)
+  if (err instanceof Error) {
+    console.error(err.stack)
+  }
   return logger
 }
 

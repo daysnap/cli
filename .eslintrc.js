@@ -23,5 +23,7 @@ module.exports = {
     '@typescript-eslint/no-empty-interface': 'off',
 
     'no-nested-ternary': 'off',
+
+    'prefer-const': 'off',
   },
 }
