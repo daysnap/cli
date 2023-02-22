@@ -1,12 +1,12 @@
 import { RC } from './requireContext'
 import { setConfig } from './config'
+import path from 'path'
 
 export function requireConfig(rc: RC) {
-  const config = rc
-    .keys()
-    .reduce<Record<string, any>>(
-      (res, key) => Object.assign(res, rc(key).default, rc(key).config),
-      {},
-    )
+  const config = rc.keys().reduce<Record<string, any>>((res, key) => {
+    const name = path.basename(path.dirname(key))
+    const config = Object.assign({}, rc(key).default, rc(key).config)
+    return Object.assign(res, { [name]: config })
+  }, {})
   return setConfig(config)
 }
