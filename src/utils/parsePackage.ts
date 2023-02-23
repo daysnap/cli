@@ -1,7 +1,10 @@
 import path from 'path'
 import { isExists } from './fs'
+import { Looser } from '@/types'
 
-export async function parsePackage(dir = '.') {
+export async function parsePackage(
+  dir = '.',
+): Promise<Looser<{ pkgPath: string }>> {
   const pkgPath = path.join(process.cwd(), dir, 'package.json')
 
   if (!(await isExists(pkgPath))) {
