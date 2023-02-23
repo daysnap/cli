@@ -121,11 +121,11 @@ export default createRoute(async (ctx) => {
     }
     await writeFile(pkgPath, JSON.stringify(pkgJson, null, 2))
     if (!(await isExists(path.join(cwd, `.husky/commit-msg`)))) {
+      // bug https://github.com/typicode/husky/issues/1019
       await exec(
         `npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'`,
       )
     }
   }
-
   spinner.succeed(`husky准备完成！可以玩耍拉！`)
 })
