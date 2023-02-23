@@ -1,5 +1,5 @@
 import { createRoute } from '@/core'
-import { isExists, spinner } from '@/utils'
+import { parsePackage, spinner } from '@/utils'
 import fetch from 'node-fetch'
 import { sleep } from '@daysnap/utils'
 
@@ -33,18 +33,19 @@ const showState = async (name: string, logId: string) => {
 export default createRoute(async (ctx) => {
   const names: string[] = ctx.args[0]
 
+  spinner.start(`正在同步...`)
+
   if (!names.length) {
-    const pkgPath = `${process.cwd()}/package.json`
-    if (await isExists(pkgPath)) {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      names.push(require(pkgPath).name)
-    }
-    if (names.length === 0) {
-      throw new Error('未指定需要同步的 npm 包名')
+    const { name } = await parsePackage()
+    if (name) {
+      names.push(name)
     }
   }
 
-  spinner.start()
+  if (names.length === 0) {
+    throw new Error('未指定需要同步的 npm 包名')
+  }
+
   for (let i = 0, len = names.length; i < len; i++) {
     await sync(names[i])
   }
