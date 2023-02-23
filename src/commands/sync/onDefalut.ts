@@ -1,14 +1,15 @@
 import { createRoute } from '@/core'
 import { parsePackage, spinner } from '@/utils'
 import fetch from 'node-fetch'
-import { sleep } from '@daysnap/utils'
 
 const sync = async (name: string) => {
+  spinner.start(`正在同步 ${name} ...`)
   const url = `https://registry-direct.npmmirror.com/${name}/sync?publish=false&nodeps=false`
   const { logId }: { ok: boolean; logId: string } = await fetch(url, {
     method: 'put',
   }).then((res) => res.json())
-  await showState(name, logId)
+  const log = await showState(name, logId)
+  spinner.succeed(`同步 ${name} 完成！同步状态：${log}`)
 }
 
 const showState = async (name: string, logId: string) => {
@@ -19,13 +20,12 @@ const showState = async (name: string, logId: string) => {
 
   spinner.text = `同步 ${name} 状态：${log}`
   if (log && log.includes('[done] Sync')) {
-    return await sleep(1000)
+    return log
   }
 
-  return new Promise<void>((resolve) => {
+  return new Promise((resolve) => {
     setTimeout(async () => {
-      await showState(name, logId)
-      resolve()
+      resolve(await showState(name, logId))
     }, 1000)
   })
 }
@@ -49,5 +49,5 @@ export default createRoute(async (ctx) => {
   for (let i = 0, len = names.length; i < len; i++) {
     await sync(names[i])
   }
-  spinner.succeed(`${names.join(' ')} 同步完成`)
+  spinner.succeed(`${names.join(' ')} 同步完成！`)
 })

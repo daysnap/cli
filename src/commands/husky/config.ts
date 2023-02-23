@@ -1,11 +1,13 @@
 export interface Config {
-  husky: string
+  husky: Record<string, any>
   commitlint: Record<string, any>
   'lint-staged': Record<string, any>
 }
 
 export const config = {
-  husky: '7.0.4',
+  husky: {
+    husky: '7.0.4',
+  },
   commitlint: {
     '@commitlint/cli': '16.2.1',
     '@commitlint/config-conventional': '16.2.1',
