@@ -47,9 +47,10 @@ export default createRoute(async (ctx) => {
     },
     [],
   )
+
   // 过滤掉已安装的包
   const installed: PkgItem[] = []
-  const { devDependencies, pkgPath } = await parsePackage()
+  const { devDependencies = {}, pkgPath } = await parsePackage()
   if (!options.force) {
     needInstall = needInstall.filter((item) => {
       const { name } = item
@@ -57,7 +58,7 @@ export default createRoute(async (ctx) => {
       if (version) {
         installed.push({ name, version })
       }
-      return version
+      return !version
     })
   }
   spinner.succeed(`解析项目完成！`)
@@ -84,8 +85,14 @@ export default createRoute(async (ctx) => {
   if (!pkgJson.scripts) pkgJson.scripts = {}
 
   // husky
-  pkgJson.scripts.prepare = `husky install && echo 'export PATH="/usr/local/bin/:$PATH"' > ~/.huskyrc`
-  await exec(`npm run prepare`)
+  if (!pkgJson.scripts.prepare) {
+    pkgJson.scripts.prepare = `husky install && echo 'export PATH="/usr/local/bin/:$PATH"' > ~/.huskyrc`
+    await writeFile(pkgPath, JSON.stringify(pkgJson, null, 2))
+  }
+  const prepareResult = (await exec(`npm run prepare`)) as string
+  if (prepareResult?.includes('skipping install')) {
+    throw new Error(prepareResult)
+  }
 
   // lint-staged
   if (gitHooks.includes('lint-staged')) {
@@ -112,7 +119,7 @@ export default createRoute(async (ctx) => {
         `module.exports = { extends: ['@commitlint/config-conventional'] }`,
       )
     }
-    await writeFile(pkgJson, JSON.stringify(pkgJson, null, 2))
+    await writeFile(pkgPath, JSON.stringify(pkgJson, null, 2))
     if (!(await isExists(path.join(cwd, `.husky/commit-msg`)))) {
       await exec(
         `npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'`,

@@ -35,6 +35,9 @@ export const createRouter =
     try {
       await next(ctx)
     } catch (err) {
+      if (spinner.isSpinning) {
+        spinner.fail(`执行错误`)
+      }
       ctx.command.outputHelp()
       error(err)
     }
