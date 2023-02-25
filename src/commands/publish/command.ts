@@ -2,10 +2,15 @@ import { createCommand, createRouter, requireAll, requireContext } from '@/core'
 
 export default createCommand((ctx) => {
   ctx.program
-    .command('husky')
-    .description('创建 git hooks')
-    .option(`-f --force`, '如果有安装过，则强制覆盖')
-    .option(`--lock`, '是否锁定版本，采用本地配置的版本')
+    .command('publish')
+    .description('发布 npm 包，会自动默认处理 version 版本')
+    .option('-r, --registry <registry>', '指定发布源')
+    .option('-v, --version <version>', '指定发布的对应版本')
+    .option('-p, --push', '推送代码到GIT仓库')
+    .option(
+      '-t, --tag [version]',
+      '指定tag版本，指定tag则默认会推送代码到git仓库',
+    )
     .action(
       createRouter(ctx, requireAll(requireContext(__dirname, /\/on.*\.js$/))),
     )
