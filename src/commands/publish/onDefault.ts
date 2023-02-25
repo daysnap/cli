@@ -2,12 +2,21 @@ import semver from 'semver'
 import { createRoute } from '@/core'
 import { parsePackage, spinner } from '@/utils'
 import { Config } from './config'
+import {
+  checkUnCommit,
+  getOnlineVersion,
+  publishPackage,
+  publishTag,
+  pushCommit,
+  updatePackage,
+  upgrade,
+} from './utils'
 
 export default createRoute(async (ctx) => {
   spinner.start(`开始执行发布流程...`)
 
   const { configServer, options } = ctx
-  let { version, tag, push } = options
+  let { version, tag, push, message } = options
   if (version && !semver.valid(version)) {
     throw new Error(`指定版本格式有误 => ${version}`)
   }
@@ -23,7 +32,44 @@ export default createRoute(async (ctx) => {
   spinner.succeed(`解析项目 package.json 完成!`)
 
   spinner.start(`查询线上版本...`)
-  // const onlineVersion = await getOn
+  const onlineVersion = await getOnlineVersion({ name, registry })
+  spinner.succeed(
+    `查询线上版本完成! 当前线上版本 => ${onlineVersion || '该包还未发布'}.`,
+  )
+
+  if (!version) {
+    version = upgrade(
+      semver.valid(semver.coerce(onlineVersion || '0.0.0')) as string,
+      1,
+    )
+  }
+
+  spinner.start(`正在写入 package.json `)
+  await updatePackage({ version, pkgPath })
+  spinner.succeed(`写入 package.json 完成!`)
+
+  if (tag === true) tag = version
+  if (push || tag) {
+    spinner.start(`检测是否有未提交内容...`)
+    const isUnCommit = await checkUnCommit()
+    spinner.succeed(isUnCommit ? `检测到未提交内容！` : `未检测到未提交内容！`)
+
+    if (isUnCommit) {
+      spinner.start(`推送代码至git仓库...`)
+      await pushCommit(`v${version}${message ? ` ${message}` : ''}`)
+      spinner.succeed(`推送代码至git仓库完成! `)
+    }
+  }
+
+  spinner.start(`正在发布版本...`)
+  await publishPackage(registry)
+  spinner.succeed(`发布版本完成! 版本 => ${version}.`)
+
+  if (tag) {
+    spinner.start(`正在打tag：${tag}并推送至git...`)
+    await publishTag(tag)
+    spinner.succeed(`tag推送完成! tag版本 => ${tag}.`)
+  }
 
   spinner.succeed(`包：${name}@${version} 发布完成！`)
 })
