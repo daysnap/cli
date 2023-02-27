@@ -1,46 +1,55 @@
 import { createRoute } from '@/core'
-import inquirer from 'inquirer'
-import { getReposList, parseAppName, parseUrl } from './utils'
+import {
+  askConfirmAndTemplate,
+  getReposList,
+  getTemplateRepo,
+  parseName,
+  parseUrl,
+  generate,
+} from './utils'
 import { spinner } from '@/utils'
 import { Config } from './config'
 
 export default createRoute(async (ctx) => {
-  spinner.start(`正在准备创建项目...`)
+  spinner.start(`正在检测环境...`)
   const { configServer, args, options } = ctx
-  const [appname] = args
-  const { name, output, inPlace } = parseAppName(appname)
+  const [rowName] = args
+  const { name, output, inPlace } = parseName(rowName)
   const config = Object.assign(
     await configServer.get<Config>('create'),
     options,
   )
   const { depositUrl, repoUrl } = parseUrl(config)
-  const { ok, template } = await inquirer.prompt<{
-    ok: boolean
-    template: string
-  }>([
+  let templates = []
+  if (!config.template) {
+    templates = await getReposList(depositUrl)
+  }
+  spinner.succeed(`检测环境完成！`)
+  const { ok = true, template = config.template } = await askConfirmAndTemplate(
     {
-      type: 'confirm',
-      message: `在当前目录中生成项目？`,
-      name: 'ok',
-      when: inPlace,
-      default: true,
+      templates,
+      inPlace,
     },
-    {
-      type: 'list',
-      message: `请选择一个模板项目：`,
-      name: 'template',
-      when: (res) => res.ok,
-      choices: config.template ? [] : await getReposList(depositUrl),
-      default: config.template,
-    },
-  ])
-
-  // 不继续执行
+  )
   if (!ok) {
     return process.exit(1)
   }
 
   spinner.start(`正在拉取模板...`)
+  const src = await getTemplateRepo({
+    template,
+    repoUrl,
+    cache: config.cache,
+  })
+  spinner.succeed(`拉取模板完成！`)
 
+  console.log(3, ok, template, src)
+
+  spinner.start(`正在创建项目...`)
+  await generate({
+    src,
+    name,
+    output,
+  })
   spinner.succeed(`创建项目完成！${name} : ${output}`)
 })
