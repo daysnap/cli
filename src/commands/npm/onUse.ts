@@ -17,4 +17,4 @@ export const onUse = createRoute(async (ctx) => {
   await exec(`npm config set registry ${registry}`)
 
   spinner.succeed(`切换源 ${name} => ${registry} 完成.`)
-}, 'use')
+})

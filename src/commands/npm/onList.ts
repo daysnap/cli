@@ -19,4 +19,4 @@ export const onList = createRoute(async (ctx) => {
   })
   spinner.succeed('查询完成，支持的源如下：')
   logger.br().print(messages).br()
-}, 'list')
+})
