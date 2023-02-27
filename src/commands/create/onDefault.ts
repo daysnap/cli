@@ -1,13 +1,13 @@
 import { createRoute } from '@/core'
+import { spinner } from '@/utils'
 import {
   askConfirmAndTemplate,
   getReposList,
   getTemplateRepo,
   parseName,
   parseUrl,
-  generate,
 } from './utils'
-import { spinner } from '@/utils'
+import { generate } from './generate'
 import { Config } from './config'
 
 export default createRoute(async (ctx) => {
@@ -43,9 +43,7 @@ export default createRoute(async (ctx) => {
   })
   spinner.succeed(`拉取模板完成！`)
 
-  console.log(3, ok, template, src)
-
-  spinner.start(`正在创建项目...`)
+  // spinner.start(`正在创建项目...`)
   await generate({
     src,
     name,

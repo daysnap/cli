@@ -109,12 +109,3 @@ export const getTemplateRepo = async (options: {
 
   return src
 }
-
-export const generate = (options: {
-  src: string
-  name: string
-  output: string
-}) => {
-  let { src, name, output } = options
-  //
-}
