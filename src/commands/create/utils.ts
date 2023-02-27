@@ -1,6 +1,7 @@
 import { geneDashLine } from '@/utils'
 import { padding } from '@daysnap/utils'
 import fetch from 'node-fetch'
+import path from 'path'
 import { Config } from './config'
 import { RepoItem } from './types'
 
@@ -31,4 +32,11 @@ export const parseUrl = (options: Config) => {
     .replace('{username}', username)
   const repoUrl = (repoUrls[deposit] || '').replace('{username}', username)
   return { depositUrl, repoUrl }
+}
+
+export const parseAppName = (appname: string) => {
+  const inPlace = !appname || appname === '.' || appname === './'
+  const name = inPlace ? path.relative('../', process.cwd()) : appname
+  const output = path.resolve(appname || '.')
+  return { name, output, inPlace }
 }

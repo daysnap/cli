@@ -1,5 +1,5 @@
 import { Context, Route } from '@/types'
-import { error } from './logger'
+import { error, logger } from './logger'
 import { spinner } from '@/utils'
 
 export const createRouter =
@@ -44,4 +44,6 @@ export const createRouter =
     if (spinner.isSpinning) {
       spinner.stop()
     }
+
+    logger.br()
   }
