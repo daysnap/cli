@@ -11,7 +11,8 @@ export const generate = async (options: {
   const { src, name, output } = options
   const opts = await getOptions(name, src)
   const metalsmith = Metalsmith(path.join(src, 'template'))
-  metalsmith.use(askQuestions(opts.configureInquirer))
+  metalsmith.use(askQuestions(opts.configureInquirer, { name }))
+
   return new Promise<void>((resolve, reject) => {
     metalsmith
       .clean(false)

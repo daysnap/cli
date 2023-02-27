@@ -43,7 +43,6 @@ export default createRoute(async (ctx) => {
   })
   spinner.succeed(`拉取模板完成！`)
 
-  // spinner.start(`正在创建项目...`)
   await generate({
     src,
     name,
