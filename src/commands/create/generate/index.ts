@@ -2,6 +2,7 @@ import Metalsmith from 'metalsmith'
 import path from 'path'
 import { getOptions } from './options'
 import { askQuestions } from './ask'
+import { filterFiles } from './filter'
 
 export const generate = async (options: {
   src: string
@@ -11,7 +12,9 @@ export const generate = async (options: {
   const { src, name, output } = options
   const opts = await getOptions(name, src)
   const metalsmith = Metalsmith(path.join(src, 'template'))
-  metalsmith.use(askQuestions(opts.configureInquirer, { name }))
+  metalsmith
+    .use(askQuestions(opts.configureInquirer || opts.prompts, { name }))
+    .use(filterFiles(opts.configureFilter || opts.filters, { name }))
 
   return new Promise<void>((resolve, reject) => {
     metalsmith

@@ -1,14 +1,32 @@
 import Metalsmith from 'metalsmith'
+import match from 'minimatch'
+import { isFunction, isObject } from '@daysnap/utils'
 import { MetalsmithHandleOptions } from './types'
-import { isObject } from '@daysnap/utils'
+import { evaluate } from './eval'
 
 export const filter = async (
   configureFilter: unknown,
   options: MetalsmithHandleOptions,
 ) => {
-  const { files } = options
+  const { files, metalsmith } = options
   if (isObject(configureFilter)) {
-    //
+    const fileNames = Object.keys(files)
+    const data = metalsmith.metadata()
+    Object.keys(configureFilter).forEach((glob) => {
+      fileNames.forEach((file) => {
+        if (match(file, glob, { dot: true })) {
+          const condition = configureFilter[glob]
+          if (!evaluate(condition, data)) {
+            delete files[file]
+          }
+        }
+      })
+    })
+    return
+  }
+
+  if (isFunction(configureFilter)) {
+    await configureFilter({ ...options })
   }
 }
 
