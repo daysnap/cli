@@ -71,6 +71,7 @@
     "figlet": "^1.5.2",
     "git-clone": "^0.2.0",
     "glob": "^8.1.0",
+    "handlebars": "^4.7.7",
     "ini": "^3.0.1",
     "inquirer": "^8.2.5",
     "launch-editor": "^2.6.0",
@@ -78,7 +79,7 @@
     "metalsmith": "^2.5.1",
     "minimist": "^1.2.7",
     "module-alias": "^2.2.2",
-    "multimatch": "^6.0.0",
+    "multimatch": "^5.0.0",
     "node-dir": "^0.1.17",
     "node-fetch": "^2.6.9",
     "ora": "^5.4.1"
