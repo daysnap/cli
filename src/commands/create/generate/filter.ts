@@ -1,5 +1,5 @@
 import Metalsmith from 'metalsmith'
-import match from 'minimatch'
+import minimatch from 'minimatch'
 import { isFunction, isObject } from '@daysnap/utils'
 import { MetalsmithHandleOptions } from './types'
 import { evaluate } from './eval'
@@ -14,7 +14,7 @@ export const filter = async (
     const data = metalsmith.metadata()
     Object.keys(configureFilter).forEach((glob) => {
       fileNames.forEach((file) => {
-        if (match(file, glob, { dot: true })) {
+        if (minimatch(file, glob, { dot: true })) {
           const condition = configureFilter[glob]
           if (!evaluate(condition, data)) {
             delete files[file]
@@ -26,7 +26,7 @@ export const filter = async (
   }
 
   if (isFunction(configureFilter)) {
-    await configureFilter({ ...options })
+    await configureFilter({ minimatch, ...options })
   }
 }
 

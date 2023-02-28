@@ -16,7 +16,7 @@ Handlebars.registerHelper('unless_eq', function (a: any, b: any, opts: any) {
 Handlebars.registerHelper('if_includes', function (a: any, b: any, opts: any) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return a.includes(b) ? opts.fn(this) : opts.inverse(this)
+  return a?.includes(b) ? opts.fn(this) : opts.inverse(this)
 })
 
 Handlebars.registerHelper(
@@ -24,7 +24,7 @@ Handlebars.registerHelper(
   function (a: any, b: any, opts: any) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    return a.includes(b) ? opts.inverse(this) : opts.fn(this)
+    return a?.includes(b) ? opts.inverse(this) : opts.fn(this)
   },
 )
 

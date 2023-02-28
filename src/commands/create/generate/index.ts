@@ -6,6 +6,8 @@ import { askQuestions } from './ask'
 import { filterFiles } from './filter'
 import { renderTemplate } from './render'
 import { setupHelper } from './handlebars'
+import { logger } from '@/core'
+import chalk from 'chalk'
 
 export const generate = async (options: {
   src: string
@@ -38,7 +40,7 @@ export const generate = async (options: {
       .build((err) => (err ? reject(err) : resolve()))
   }).then(() => {
     if (isFunction(opts.complete)) {
-      return opts.complete(data)
+      return opts.complete(data, { logger, chalk })
     }
   })
 }
