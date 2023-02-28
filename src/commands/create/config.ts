@@ -1,7 +1,6 @@
 export interface Config {
   orgname: string
   username: string
-  cache: boolean
   deposit: string
   depositUrls: Record<string, any>
   repoUrls: Record<string, any>
@@ -10,7 +9,6 @@ export interface Config {
 export const config: Config = {
   orgname: 'daysnap-templates',
   username: '',
-  cache: false,
   deposit: 'github',
   depositUrls: {
     github: `https://api.github.com/users/{username}/repos?page=1&per_page=999`,
