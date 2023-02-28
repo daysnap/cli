@@ -7,6 +7,9 @@ export default createCommand((ctx) => {
     .option('-l, --list', '列出当前支持的 npm 源')
     .option('-u, --use <name>', '切换 npm 源')
     .action(
-      createRouter(ctx, requireAll(requireContext(__dirname, /\/on.*\.js$/))),
+      createRouter(
+        ctx,
+        requireAll(requireContext(__dirname, /[/\\]on.*\.js$/)),
+      ),
     )
 })

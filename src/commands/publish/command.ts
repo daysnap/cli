@@ -13,6 +13,9 @@ export default createCommand((ctx) => {
       '指定tag版本，指定tag则默认会推送代码到git仓库',
     )
     .action(
-      createRouter(ctx, requireAll(requireContext(__dirname, /\/on.*\.js$/))),
+      createRouter(
+        ctx,
+        requireAll(requireContext(__dirname, /[/\\]on.*\.js$/)),
+      ),
     )
 })

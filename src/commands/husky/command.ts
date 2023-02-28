@@ -7,6 +7,9 @@ export default createCommand((ctx) => {
     .option(`-f --force`, '如果有安装过，则强制覆盖')
     .option(`--lock`, '是否锁定版本，采用本地配置的版本')
     .action(
-      createRouter(ctx, requireAll(requireContext(__dirname, /\/on.*\.js$/))),
+      createRouter(
+        ctx,
+        requireAll(requireContext(__dirname, /[/\\]on.*\.js$/)),
+      ),
     )
 })

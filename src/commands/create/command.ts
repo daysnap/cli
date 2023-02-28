@@ -11,6 +11,9 @@ export default createCommand((ctx) => {
     .option('-d, --deposit <deposit>', '指明使用 gitee 还是 github')
     .option('-u, --username <username>', '指定用户')
     .action(
-      createRouter(ctx, requireAll(requireContext(__dirname, /\/on.*\.js$/))),
+      createRouter(
+        ctx,
+        requireAll(requireContext(__dirname, /[/\\]on.*\.js$/)),
+      ),
     )
 })

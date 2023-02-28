@@ -13,6 +13,9 @@ export default createCommand((ctx) => {
     )
     .option('-d, --dot', '是否匹配点文件')
     .action(
-      createRouter(ctx, requireAll(requireContext(__dirname, /\/on.*\.js$/))),
+      createRouter(
+        ctx,
+        requireAll(requireContext(__dirname, /[/\\]on.*\.js$/)),
+      ),
     )
 })

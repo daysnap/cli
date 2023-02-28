@@ -10,6 +10,9 @@ export default createCommand((ctx) => {
     .option('-e, --edit', '使用默认编辑器打开配置')
     .option('--json', 'JSON 的形式展示配置')
     .action(
-      createRouter(ctx, requireAll(requireContext(__dirname, /\/on.*\.js$/))),
+      createRouter(
+        ctx,
+        requireAll(requireContext(__dirname, /[/\\]on.*\.js$/)),
+      ),
     )
 })
