@@ -30,12 +30,9 @@ export const filter = async (
   }
 }
 
-export const filterFiles = (
-  configureFilter: unknown,
-  options: { name: string },
-): Metalsmith.Plugin => {
+export const filterFiles = (configureFilter: unknown): Metalsmith.Plugin => {
   return (files, metalsmith, done) => {
-    filter(configureFilter, { files, metalsmith, ...options })
+    filter(configureFilter, { files, metalsmith })
       .then(() => {
         done(null, files, metalsmith)
       })

@@ -13,9 +13,10 @@ export const generate = async (options: {
   output: string
 }) => {
   const { src, name, output } = options
-  const opts = await getOptions(name, src)
+  const { author, ...opts } = await getOptions(name, src)
   const metalsmith = Metalsmith(path.join(src, 'template'))
   const data = Object.assign(metalsmith.metadata(), {
+    author,
     destDirName: name,
     name,
     output,
@@ -25,8 +26,8 @@ export const generate = async (options: {
   setupHelper(opts.configureHelper || opts.helpers)
 
   metalsmith
-    .use(askQuestions(opts.configureInquirer || opts.prompts, { name }))
-    .use(filterFiles(opts.configureFilter || opts.filters, { name }))
+    .use(askQuestions(opts.configureInquirer || opts.prompts))
+    .use(filterFiles(opts.configureFilter || opts.filters))
     .use(renderTemplate(opts.skipInterpolation))
 
   return new Promise<void>((resolve, reject) => {

@@ -19,7 +19,10 @@ export const getMetadata = async (dir: string) => {
   }, {})
 }
 
-export const getOptions = async (name: string, dir: string) => {
+export const getOptions = async (
+  name: string,
+  dir: string,
+): Promise<Record<string, any>> => {
   const opts = await getMetadata(dir)
 
   setDefault(opts, {
@@ -37,7 +40,7 @@ export const getOptions = async (name: string, dir: string) => {
     })
   }
 
-  return opts
+  return { ...opts, author }
 }
 
 function setDefault(

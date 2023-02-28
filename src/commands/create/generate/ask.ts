@@ -22,12 +22,9 @@ export const ask = async (
   }
 }
 
-export const askQuestions = (
-  configureInquirer: unknown,
-  options: { name: string },
-): Metalsmith.Plugin => {
+export const askQuestions = (configureInquirer: unknown): Metalsmith.Plugin => {
   return (files, metalsmith, done) => {
-    ask(configureInquirer, { files, metalsmith, ...options })
+    ask(configureInquirer, { files, metalsmith })
       .then((res) => {
         Object.assign(metalsmith.metadata(), res)
         done(null, files, metalsmith)
