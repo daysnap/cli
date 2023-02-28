@@ -13,6 +13,21 @@ Handlebars.registerHelper('unless_eq', function (a: any, b: any, opts: any) {
   return a === b ? opts.inverse(this) : opts.fn(this)
 })
 
+Handlebars.registerHelper('if_includes', function (a: any, b: any, opts: any) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return a.includes(b) ? opts.fn(this) : opts.inverse(this)
+})
+
+Handlebars.registerHelper(
+  'unless_includes',
+  function (a: any, b: any, opts: any) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return a.includes(b) ? opts.inverse(this) : opts.fn(this)
+  },
+)
+
 export const setupHelper = (configureHelper: unknown) => {
   if (isObject(configureHelper)) {
     Object.keys(configureHelper).forEach((key) => {
