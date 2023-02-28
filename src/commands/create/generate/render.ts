@@ -32,7 +32,7 @@ export const render = async (
       continue
     }
     const content = await handlebarsRender(str, metadata)
-    file.contents = new Buffer(content)
+    file.contents = Buffer.from(content)
   }
 }
 

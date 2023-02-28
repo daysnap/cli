@@ -3,6 +3,7 @@ import path from 'path'
 import { isExists } from '@/utils'
 import { Looser } from '@/types'
 import { isArray, isObject } from '@daysnap/utils'
+import { getGitUser } from './gitUser'
 
 export const getMetadata = async (dir: string) => {
   return [
@@ -20,15 +21,34 @@ export const getMetadata = async (dir: string) => {
 
 export const getOptions = async (name: string, dir: string) => {
   const opts = await getMetadata(dir)
-  setDefault(opts, 'name', name)
+
+  setDefault(opts, {
+    key: 'name',
+    val: name,
+    message: '项目名',
+  })
+
+  const author = getGitUser()
+  if (author) {
+    setDefault(opts, {
+      key: 'author',
+      val: author,
+      message: '作者',
+    })
+  }
+
   return opts
 }
 
 function setDefault(
   opts: Looser<{ configureInquirer?: unknown }>,
-  key: string,
-  val: string,
+  options: {
+    key: string
+    val: string
+    message: string
+  },
 ) {
+  const { key, val, ...rest } = options
   if (!opts.configureInquirer) {
     opts.configureInquirer = []
   }
@@ -37,8 +57,8 @@ function setDefault(
     if (!prompts[key] || !isObject(prompts[key])) {
       prompts[key] = {
         type: 'string',
-        message: '项目名',
         default: val,
+        ...rest,
       }
     } else {
       prompts[key].default = val
@@ -46,7 +66,7 @@ function setDefault(
   } else if (isArray(prompts)) {
     let prompt = prompts.find((item) => item.name === key)
     if (!prompt) {
-      prompt = { type: 'string', message: '项目名' }
+      prompt = { type: 'string', ...rest }
       prompts.unshift(prompt)
     }
     prompt.default = val
