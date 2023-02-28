@@ -14,8 +14,8 @@ export function getBasePath(dir: string) {
       basePath = path.dirname(basePath)
     }
   }
-  if (!basePath.endsWith('/')) {
-    basePath += '/'
+  if (!basePath.endsWith(path.sep)) {
+    basePath += path.sep
   }
   return basePath
 }

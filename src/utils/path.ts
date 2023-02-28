@@ -7,10 +7,10 @@ export function normalizePath(filepath: string) {
 export function getAbsolutePath(filepath: string) {
   let res: string
   if (path.isAbsolute(filepath)) {
-    res = normalizePath(filepath)
+    res = path.normalize(filepath)
   } else {
-    const basePath = normalizePath(path.resolve(''))
-    res = path.join(basePath, normalizePath(filepath))
+    const basePath = path.normalize(path.resolve(''))
+    res = path.join(basePath, path.normalize(filepath))
   }
 
   // return res.replace(/[-^$*+?.()|[\]{}]/g, '\\$&')
