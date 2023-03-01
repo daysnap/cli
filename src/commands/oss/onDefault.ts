@@ -63,6 +63,7 @@ export default createRoute(async (ctx) => {
       absolute: true,
       dot, // 显式点将始终匹配点文件
     })
+    .map(path.normalize)
     .map((filepath) => {
       if (!filepath.includes(basePath)) {
         throw new Error(`路径计算有误：${basePath}`)
