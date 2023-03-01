@@ -1,15 +1,8 @@
 import Metalsmith from 'metalsmith'
 import multimatch from 'multimatch'
-import consolidate from 'consolidate'
 import { isString } from '@daysnap/utils'
 import { MetalsmithHandleOptions } from './types'
-
-const handlebarsRender = (str: string, data: Record<string, any>) =>
-  new Promise<string>((resolve, reject) => {
-    consolidate.handlebars.render(str, data, (err, res) => {
-      err ? reject(err) : resolve(res)
-    })
-  })
+import artTemplate from 'art-template'
 
 export const render = async (
   skipInterpolation: string | string[],
@@ -31,8 +24,7 @@ export const render = async (
     if (!/{{([^{}]+)}}/g.test(str)) {
       continue
     }
-    const content = await handlebarsRender(str, metadata)
-    file.contents = Buffer.from(content)
+    file.contents = Buffer.from(artTemplate.render(str, metadata))
   }
 }
 

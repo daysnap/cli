@@ -1,13 +1,13 @@
 import Metalsmith from 'metalsmith'
 import path from 'path'
+import chalk from 'chalk'
+import { logger } from '@/core'
 import { isFunction } from '@daysnap/utils'
 import { getOptions } from './options'
 import { askQuestions } from './ask'
 import { filterFiles } from './filter'
 import { renderTemplate } from './render'
-import { setupHelper } from './handlebars'
-import { logger } from '@/core'
-import chalk from 'chalk'
+import { setupHelper } from './art-template'
 
 export const generate = async (options: {
   src: string
