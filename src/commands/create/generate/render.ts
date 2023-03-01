@@ -4,6 +4,17 @@ import { isString } from '@daysnap/utils'
 import { MetalsmithHandleOptions } from './types'
 import artTemplate from 'art-template'
 
+function mini(source: string) {
+  source = source
+    // remove double newline / carriage return into one newline / carriage return
+    .replace(/\n\s*(?=\n)/g, '')
+    // remove cr and space before {{ block/if/else }}
+    .replace(/\n\s*(\${{\s*(block|if|each|else)\s*[^}]*}})/g, '$1')
+    // remove cr and space before {{ /block/if }}
+    .replace(/\n\s*(\${{\s*\/(block|if|each)\s*}})/g, '$1')
+  return source
+}
+
 export const render = async (
   skipInterpolation: string | string[],
   options: Pick<MetalsmithHandleOptions, 'metalsmith' | 'files'>,
@@ -24,7 +35,7 @@ export const render = async (
     if (!/{{([^{}]+)}}/g.test(str)) {
       continue
     }
-    file.contents = Buffer.from(artTemplate.render(str, metadata))
+    file.contents = Buffer.from(artTemplate.render(mini(str), metadata))
   }
 }
 
