@@ -7,11 +7,11 @@
     "dsc": "bin/dsc.js"
   },
   "scripts": {
-    "build": "npm run clean && tsc --watch",
     "clean": "rimraf ./dist",
-    "dev": "node ./bin/dsc.js",
+    "dev": "npm run clean && tsc --watch",
+    "build": "npm run clean && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "dsc publish -t"
+    "release": "npm run build && dsc publish -t"
   },
   "repository": {
     "type": "git",
@@ -86,6 +86,6 @@
     "rimraf": "^3.0.2"
   },
   "_moduleAliases": {
-    "@": "./dist/"
+    "@": "/Users/ajuan/Desktop/daysnap/cli/dist/"
   }
 }
