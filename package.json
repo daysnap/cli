@@ -86,6 +86,6 @@
     "rimraf": "^3.0.2"
   },
   "_moduleAliases": {
-    "@": "/Users/ajuan/Desktop/daysnap/cli/dist/"
+    "@": "./dist/"
   }
 }
