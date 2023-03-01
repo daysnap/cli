@@ -69,7 +69,9 @@ export default createRoute(async (ctx) => {
       }
       return {
         filepath,
-        uploadPath: path.join(output.directory, filepath.replace(basePath, '')),
+        uploadPath: path
+          .join(output.directory, filepath.replace(basePath, ''))
+          .replace(/\\/g, '/'),
       }
     })
 
