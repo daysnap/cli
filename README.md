@@ -16,3 +16,8 @@
 - [ini](https://www.npmjs.com/package/ini)
 - [ora](https://www.npmjs.com/package/ora)
 - [module-alias](https://www.npmjs.com/package/module-alias)
+
+
+## 注意
+
+- [module-alias](https://www.npmjs.com/package/module-alias) 插件因为会影响修改 `package.json` 文件，所以特意备份了下源码，处理了这个问题

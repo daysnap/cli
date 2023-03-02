@@ -43,7 +43,7 @@
     // "noResolve": true,                                /*禁止`import`s、`require`s或`reference>`s扩展TypeScript应添加到项目中的文件数*/
 
     /*JavaScript支持*/
-    // "allowJs": true,                                  /*允许JavaScript文件成为程序的一部分。使用“checkJS”选项从这些文件中获取错误——允许编译JS*/
+     "allowJs": true,                                  /*允许JavaScript文件成为程序的一部分。使用“checkJS”选项从这些文件中获取错误——允许编译JS*/
     /* 是否检测JS的语法,例如下面的语法编辑器会报错
        let name = 'paul';
        console.log(name.a.b) */
@@ -110,5 +110,8 @@
     /*完整性*/
     // "skipDefaultLibCheck": true,                      /*跳过类型检查。d、 ts包含在TypeScript中的文件*/
     "skipLibCheck": true                                 /*跳过类型检查全部。d、 ts文件*/
-  }
+  },
+  "include": [
+    "src"
+  ]
 }

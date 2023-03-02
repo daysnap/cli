@@ -17,8 +17,7 @@ export const config: Config = {
   repoUrls: {
     // github: 'github:{username}/{repo}',
     // gitee: 'gitee:{username}/{repo}',
-    // github: 'https://github.com/{username}/{repo}.git',
     github: 'git@github.com:{username}/{repo}.git',
-    gitee: 'https://gitee.com/{username}/{repo}.git',
+    gitee: 'git@gitee.com:{username}/{repo}.git',
   },
 }
