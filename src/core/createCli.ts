@@ -13,7 +13,6 @@ export function createCli(argv: string[], options?: ParseOptions): Cli {
 
     const rc = requireContext(dirname, /\.js$/)
     rc.keys()
-      // .filter((k) => !k.includes(`${dirname}/index.js`))
       .map((k) => rc(k).default)
       .filter((item) => item && item.install)
       .sort((x, y) => x.sort - y.sort)
