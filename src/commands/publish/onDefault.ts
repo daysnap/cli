@@ -48,6 +48,10 @@ export default createRoute(async (ctx) => {
   await updatePackage({ version, pkgPath })
   spinner.succeed(`写入 package.json 完成!`)
 
+  spinner.start(`正在发布版本...`)
+  await publishPackage(registry)
+  spinner.succeed(`发布版本完成! 版本 => ${version}.`)
+
   if (tag === true) tag = version
   if (push || tag) {
     spinner.start(`检测是否有未提交内容...`)
@@ -60,10 +64,6 @@ export default createRoute(async (ctx) => {
       spinner.succeed(`推送代码至git仓库完成! `)
     }
   }
-
-  spinner.start(`正在发布版本...`)
-  await publishPackage(registry)
-  spinner.succeed(`发布版本完成! 版本 => ${version}.`)
 
   if (tag) {
     spinner.start(`正在打tag：${tag}并推送至git...`)
