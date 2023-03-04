@@ -84,8 +84,9 @@ export const getTemplateRepo = async (options: {
   template: string
   cache?: boolean
   repoUrl: string
+  branch?: string
 }) => {
-  let { template, cache = false, repoUrl } = options
+  let { template, cache = false, repoUrl, branch } = options
   let src = path.resolve(
     os.homedir(),
     '.dsc-templates',
@@ -100,9 +101,12 @@ export const getTemplateRepo = async (options: {
       throw new Error(`本地模板没有找到！模板路径 => ${src}`)
     }
   } else {
-    const repo = repoUrl.replace('{repo}', template)
+    let repo = repoUrl.replace('{repo}', template)
     if (await isExists(src)) {
       rimraf.sync(src)
+    }
+    if (branch) {
+      repo += `-b ${branch}`
     }
     await clone(repo, src)
   }

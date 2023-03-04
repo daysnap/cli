@@ -40,6 +40,7 @@ export default createRoute(async (ctx) => {
     template,
     repoUrl,
     cache: config.cache,
+    branch: options.branch,
   })
   spinner.succeed(`拉取模板完成！`)
 
