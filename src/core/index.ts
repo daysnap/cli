@@ -1,3 +1,5 @@
+export * from '@daysnap/require-context'
+
 export * from './config'
 export * from './createCli'
 export * from './createCommand'
@@ -8,5 +10,4 @@ export * from './overwrite'
 export * from './prefix'
 export * from './requireAll'
 export * from './requireConfig'
-export * from './requireContext'
 export * from './suffix'

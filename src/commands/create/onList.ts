@@ -1,6 +1,6 @@
 import { createRoute, logger } from '@/core'
 import { spinner } from '@/utils'
-import { formatReposToMessages, getReposList, parseUrl } from './utils'
+import { formatRepos, getReposList, parseUrl } from './utils'
 import { Config } from './config'
 
 export const onList = createRoute(async (ctx) => {
@@ -19,5 +19,5 @@ export const onList = createRoute(async (ctx) => {
     throw new Error(`未找到相关模板：${depositUrl}`)
   }
   spinner.succeed(`查询模板列表完成，模板如下：`)
-  logger.br().print(formatReposToMessages(repos))
+  logger.br().print(formatRepos(repos).map((item) => item.name))
 })

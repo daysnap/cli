@@ -1,11 +1,10 @@
-import { geneDashLine, isExists } from '@/utils'
+import { exec, geneDashLine, isExists } from '@/utils'
 import { padding } from '@daysnap/utils'
 import fetch from 'node-fetch'
 import inquirer from 'inquirer'
 import path from 'path'
 import os from 'os'
 import rimraf from 'rimraf'
-import clone from 'git-clone/promise'
 import { Config } from './config'
 import { RepoItem } from './types'
 
@@ -13,15 +12,18 @@ export async function getReposList(url: string): Promise<any> {
   return await fetch(url).then((res) => res.json())
 }
 
-export const formatReposToMessages = (repos: RepoItem[]) => {
+export const formatRepos = (repos: RepoItem[]) => {
   const data = repos.map(({ name, description }) => ({ name, description }))
   const length = Math.max(...data.map((item) => item.name.length)) + 3
   return data.map((item, index) => {
     const { name, description } = item
-    return padding(
-      `${index + 1}. ${name}${geneDashLine(name, length)}${description}`,
-      4,
-    )
+    return {
+      name: padding(
+        `${index + 1}. ${name}${geneDashLine(name, length)}${description}`,
+        4,
+      ),
+      value: name,
+    }
   })
 }
 
@@ -61,7 +63,6 @@ export const askConfirmAndTemplate = async ({
       message: `在当前目录中生成项目？`,
       name: 'ok',
       when: inPlace,
-      default: true,
     },
     {
       type: 'list',
@@ -70,7 +71,7 @@ export const askConfirmAndTemplate = async ({
       when: ({ ok = true }) => {
         return ok && !!templates.length
       },
-      choices: templates,
+      choices: formatRepos(templates),
     },
   ])
 }
@@ -105,10 +106,11 @@ export const getTemplateRepo = async (options: {
     if (await isExists(src)) {
       rimraf.sync(src)
     }
+
     if (branch) {
-      repo += `-b ${branch}`
+      repo = `-b ${branch} ${repo}`
     }
-    await clone(repo, src)
+    await exec(`git clone ${repo} ${src}`)
   }
 
   return src

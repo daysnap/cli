@@ -1,4 +1,4 @@
-import { RC } from './requireContext'
+import { RC } from '@daysnap/require-context'
 import { setConfig } from './config'
 import path from 'path'
 

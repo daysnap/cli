@@ -1,4 +1,4 @@
-import { RC } from './requireContext'
+import { RC } from '@daysnap/require-context'
 
 export function requireAll(rc: RC) {
   return rc

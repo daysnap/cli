@@ -1,7 +1,7 @@
 import { ParseOptions, program } from 'commander'
 import minimist from 'minimist'
 import { Cli, Context } from '@/types'
-import { requireContext } from './requireContext'
+import { requireContext } from '@daysnap/require-context'
 import { requireConfig } from './requireConfig'
 import { prefix } from './prefix'
 import { suffix } from './suffix'
