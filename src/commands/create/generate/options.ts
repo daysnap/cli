@@ -28,7 +28,6 @@ export const getOptions = async (
   setDefault(opts, {
     key: 'name',
     val: name,
-    message: '项目名',
   })
 
   const author = getGitUser()
@@ -36,7 +35,6 @@ export const getOptions = async (
     setDefault(opts, {
       key: 'author',
       val: author,
-      message: '作者',
     })
   }
 
@@ -48,30 +46,21 @@ function setDefault(
   options: {
     key: string
     val: string
-    message: string
   },
 ) {
-  const { key, val, ...rest } = options
+  const { key, val } = options
   if (!opts.configureInquirer) {
     opts.configureInquirer = []
   }
   const prompts = opts.configureInquirer
   if (isObject(prompts)) {
-    if (!prompts[key] || !isObject(prompts[key])) {
-      prompts[key] = {
-        type: 'string',
-        default: val,
-        ...rest,
-      }
-    } else {
+    if (prompts[key] && isObject(prompts[key])) {
       prompts[key].default = val
     }
   } else if (isArray(prompts)) {
     let prompt = prompts.find((item) => item.name === key)
-    if (!prompt) {
-      prompt = { type: 'string', ...rest }
-      prompts.unshift(prompt)
+    if (prompt) {
+      prompt.default = val
     }
-    prompt.default = val
   }
 }

@@ -2,6 +2,7 @@ import Metalsmith from 'metalsmith'
 import path from 'path'
 import chalk from 'chalk'
 import { logger } from '@/core'
+import { exec, isExists } from '@/utils'
 import { isFunction } from '@daysnap/utils'
 import { getOptions } from './options'
 import { askQuestions } from './ask'
@@ -16,7 +17,9 @@ export const generate = async (options: {
 }) => {
   const { src, name, output } = options
   const { author, ...opts } = await getOptions(name, src)
-  const metalsmith = Metalsmith(path.join(src, 'template'))
+
+  const dir = path.join(src, 'template')
+  const metalsmith = Metalsmith((await isExists(dir)) ? dir : src)
   const data = Object.assign(metalsmith.metadata(), {
     author,
     destDirName: name,
@@ -40,7 +43,7 @@ export const generate = async (options: {
       .build((err) => (err ? reject(err) : resolve()))
   }).then(() => {
     if (isFunction(opts.complete)) {
-      return opts.complete(data, { logger, chalk })
+      return opts.complete(data, { logger, chalk, exec })
     }
   })
 }

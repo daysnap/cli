@@ -12,9 +12,11 @@ export const ask = async (
       (res, [name, value]) => [...res, { name, ...value }],
       [],
     )
-    return inquirer.prompt(prompts)
+    if (prompts.length) {
+      return inquirer.prompt(prompts)
+    }
   }
-  if (isArray(configureInquirer)) {
+  if (isArray(configureInquirer) && configureInquirer.length) {
     return inquirer.prompt(configureInquirer)
   }
   if (isFunction(configureInquirer)) {
