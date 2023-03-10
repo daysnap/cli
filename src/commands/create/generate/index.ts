@@ -1,14 +1,14 @@
 import Metalsmith from 'metalsmith'
-import path from 'path'
 import chalk from 'chalk'
 import { logger } from '@/core'
-import { exec, isExists } from '@/utils'
+import { exec } from '@/utils'
 import { isFunction } from '@daysnap/utils'
 import { getOptions } from './options'
 import { askQuestions } from './ask'
 import { filterFiles } from './filter'
 import { renderTemplate } from './render'
 import { setupHelper } from './art-template'
+import { merge } from './merge'
 
 export const generate = async (options: {
   src: string
@@ -18,8 +18,7 @@ export const generate = async (options: {
   const { src, name, output } = options
   const { author, ...opts } = await getOptions(name, src)
 
-  const dir = path.join(src, 'template')
-  const metalsmith = Metalsmith((await isExists(dir)) ? dir : src)
+  const metalsmith = Metalsmith(await merge(src))
   const data = Object.assign(metalsmith.metadata(), {
     author,
     destDirName: name,

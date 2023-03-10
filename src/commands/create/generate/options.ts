@@ -52,6 +52,7 @@ function setDefault(
   if (!opts.configureInquirer) {
     opts.configureInquirer = []
   }
+
   const prompts = opts.configureInquirer
   if (isObject(prompts)) {
     if (prompts[key] && isObject(prompts[key])) {

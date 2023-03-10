@@ -15,6 +15,7 @@
 - [figlet](https://www.npmjs.com/package/figlet) [examples](http://www.figlet.org/examples.html)
 - [ini](https://www.npmjs.com/package/ini)
 - [ora](https://www.npmjs.com/package/ora)
+- [shelljs](https://www.npmjs.com/package/shelljs)
 - [module-alias](https://www.npmjs.com/package/module-alias)
 
 
