@@ -18,9 +18,7 @@
 
 ## 快速入门
 
-::: warning Node 版本要求
-需要 [Node.js](https://nodejs.org/zh-cn/) >= 12.0
-:::
+> warning Node 版本要求： [Node.js](https://nodejs.org/zh-cn/) >= 12.0
 
 ### 安装
 
@@ -38,9 +36,7 @@
    dsc -v
    ```
 
-<img src="/other/img_11.png"/>
-
-更多命令使用请移步 [这里](/03_前端H5_/02_脚手架/02_命令.html)
+<img src="https://github.com/daysnap/cli/blob/main/docs/commond.png?raw=true"/>
 
 
 ### 升级
@@ -311,3 +307,6 @@ Commands:
 ## 注意
 
 - [module-alias](https://www.npmjs.com/package/module-alias) 插件因为会影响修改 `package.json` 文件，所以特意备份了下源码，处理了这个问题
+
+
+详情文档请移步 [这里](https://daysnap.github.io/cli/)
