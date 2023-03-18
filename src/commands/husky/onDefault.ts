@@ -100,7 +100,7 @@ export default createRoute(async (ctx) => {
       'pre-commit': 'lint-staged',
     }
     pkgJson['lint-staged'] = {
-      [`*.{${extname.join(',')}`]: 'eslint --fix',
+      [`*.{${extname.join(',')}}`]: 'eslint --fix',
     }
     await writeFile(pkgPath, JSON.stringify(pkgJson, null, 2))
     if (!(await isExists(path.join(cwd, `.husky/commit-msg`)))) {
