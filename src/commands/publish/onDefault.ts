@@ -16,7 +16,7 @@ export default createRoute(async (ctx) => {
   spinner.start(`开始执行发布流程...`)
 
   const { configServer, options } = ctx
-  let { version, tag, push, message } = options
+  let { version, tag, push, message, pnpm } = options
   if (version && !semver.valid(version)) {
     throw new Error(`指定版本格式有误 => ${version}`)
   }
@@ -49,10 +49,12 @@ export default createRoute(async (ctx) => {
   spinner.succeed(`写入 package.json 完成!`)
 
   spinner.start(`正在发布版本...`)
-  await publishPackage(registry)
+  await publishPackage(registry, pnpm)
   spinner.succeed(`发布版本完成! 版本 => ${version}.`)
 
-  if (tag === true) tag = version
+  if (tag === true) {
+    tag = version
+  }
   if (push || tag) {
     spinner.start(`检测是否有未提交内容...`)
     const isUnCommit = await checkUnCommit()

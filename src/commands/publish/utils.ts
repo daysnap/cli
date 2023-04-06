@@ -40,8 +40,12 @@ export async function updatePackage({
 }
 
 // 发布版本
-export async function publishPackage(registry: string) {
-  await exec(`npm publish --registry ${registry}`)
+export async function publishPackage(registry: string, pnpm = false) {
+  if (pnpm) {
+    await exec(`pnpm publish --registry ${registry} --no-git-checks`)
+  } else {
+    await exec(`npm publish --registry ${registry}`)
+  }
 }
 
 // 推送git
